@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html ng-app="gdadb">
+<head>
+	<title>GDA DB</title>
+
+	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../assets/css/styles.css">
+
+	<!--  Angular from Google CDN -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script>
+	<!-- Load AppController -->
+	<script type="text/javascript" src="../controllers/app.js"></script>
+</head>
+<body ng-controller="appCtrl">
+	<div class="container-fluid gdadb-background">
+            <form name="playSearch" ng-submit="submitted && searchPlay()" >
+	    <div class="row-fluid">
+		<div class="col-sm-12">
+		    <div class="row-fluid gdadb-header">
+			<div class="col-sm-2 gdadb-logo" >
+			    GTADB
+		 	</div>
+			<div class="col-sm-8 gdadb-controls">
+			    <div class="row gdadb-buttons">
+				<div class="col-sm-8 gdadb-control-wrapper">
+				    <input class="form-control gdadb-search-box" type="text" name="search" id="search" value="" placeholder="Find plays, actors, actresses, and more..." ng-model="formData.search"/> 
+				</div>
+				<div class="col-sm-2 gdadb-control-wrapper">
+				    <select name="type" id="type" class="form-control" ng-model="formData.type">
+					<option id="All" value="All">All</option>
+				    </select>
+				</div>
+				<div class="col-sm-2 gdadb-control-wrapper">
+				    <button type="submit" class="btn btn-primary btn-sm" ng-click="submitted=true">
+					Search
+				</button>
+				</div>
+			    </div>
+			    <div class="row gdadb-menu-row">
+				<div class="col-sm-3">
+				    <a href="/add">
+				    Plays v
+				    </a>
+				</div>
+				<div class="col-sm-3">
+				    Cast and Crew v
+				</div>
+				<div class="col-sm-3">
+				    News v
+				</div>
+				<div class="col-sm-3">
+				    Watchlist v
+				</div>
+			    </div>
+			</div>
+			<div class="col-sm-2 gdadb-social-media">
+			    Social Media
+			</div>
+		    </div>
+		</div>
+            </div>
+            </form>
+	</div>
+        <div id="play-list" class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+
+                        <!-- LOOP OVER THE PLAYS IN $scope.plays -->
+                        <div ng-repeat="play in plays" class="play-item">
+                                <div class="input-group input-group-lg">
+                                        <div class="input-group-addon">
+                                        </div>
+                                        <div type="text" class="form-control" style="height: auto" >
+					    <a href="/details/{{play._id}}">
+						<img src="../assets/images/woo.jpg" class="play-image-sm" alt="{{play._id}}"/>
+						<span class="play-title">{{play._id}}</span>
+					    </a>
+					</div>
+                                </div>
+                        </div>
+
+                </div>
+        </div>
+
+	<div>
+	</div>
+</body>
+</html>

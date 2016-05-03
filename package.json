@@ -1,0 +1,15 @@
+{
+  "name": "GDA-DB",
+  "version": "0.0.1",
+  "description": "Gonzaga Dramatic Association DB.",
+  "main": "server.js",
+  "author": "Joe McMahon",
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "jade": "^1.11.0",
+    "mongoose": "latest",
+    "morgan": "latest",
+    "request": "latest"
+  }
+}

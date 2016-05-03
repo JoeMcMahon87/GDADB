@@ -1,0 +1,12 @@
+extend layout
+block content
+  div.row(id='play-list')
+    div.col-sm-6.col-sm-offset-3
+      for p in plays
+        div.play-item
+          div.input-group.input-group-lg
+            div.input-group-addon
+            div.form-control(type="text",style="height:auto")
+              a(href='/details/#{p._id}')
+                img.play-image-sm(src='../assets/images/woo.jpg',alt='#{p._id}')
+                span.play-title= p._id
