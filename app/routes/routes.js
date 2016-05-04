@@ -19,6 +19,16 @@ module.exports = function(app) {
 		res.end();
 	});
 
+	app.get('/search', function(req, res) {
+		var queryType = req.query.type;
+		queryTerm = {'$text':{'$search':req.query.search}};
+		Play.find(queryTerm)
+			.sort('_id').exec(function(err, plays) {
+console.log(plays);
+				res.render('index', { plays : plays });
+		});
+	});
+
 	app.get('/details/:id', function(req, res) {
 		var playId = req.params.id;
 		Play.findOne({ '_id' : req.params.id}, function(err, play) {
