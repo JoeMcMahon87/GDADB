@@ -44,7 +44,6 @@ module.exports = function(app) {
 
 	app.get('/showPlay/:play_id', function (req, res) {
 		Play.findOne({ '_id' : req.params.play_id}, function(err, play) {
-			console.log(JSON.stringify(play));
 			res.send(play)
 		});
 	});

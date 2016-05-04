@@ -24,7 +24,6 @@ module.exports = function(app) {
 		queryTerm = {'$text':{'$search':req.query.search}};
 		Play.find(queryTerm)
 			.sort('_id').exec(function(err, plays) {
-console.log(plays);
 				res.render('index', { plays : plays });
 		});
 	});
@@ -45,7 +44,6 @@ console.log(plays);
 	app.get('*', function(req, res) {
 		// Displaying an already made view
 		Play.find(function(err,plays) {
-console.log(JSON.stringify(plays));
 			res.render('index', { title: 'TEST', plays : plays } );
 		});
 		//res.sendFile('public/views/index.html', { root: '/home/jmcmahon/gdadb/'});

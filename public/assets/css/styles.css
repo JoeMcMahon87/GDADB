@@ -86,4 +86,45 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	line-height: 40px;
 	text-align: center;
 }
-	
+.title-area {
+	background: rgba(76,76,76,1);
+        color: #ddd;
+}
+.subtitle {
+	font-size: 0.8em;
+        color: #aaa;
+}
+.play-poster {
+	min-height: 272px;
+	height: 100%;
+	width: 100%;
+}
+.main-photo {
+        min-height: 272px;
+	height: 100%;
+	width: 100%;
+}
+.summary-area {
+	border: 1px solid black;
+}
+.bold {
+	font-weight: bold;
+}
+.gray {
+	color: #ccc;
+}
+.awards-area {
+	border: 1px solid black;
+}
+.cast-line {
+}
+.headshot {
+}
+.castname {
+}
+.spacer {
+}
+.rolename {
+}
+.portrait {
+}
