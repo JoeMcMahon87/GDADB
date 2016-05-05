@@ -1,3 +1,15 @@
+body {
+	background-attachment: scroll;
+	background-image: -webkit-linear-gradient(top, rgb(179,179,176) 0%, rgb(227,226,221) 500px);
+	background-origin: padding-box;
+	background-size: auto;
+	background:#b3b3b0;
+	background:-webkit-linear-gradient(top, #b3b3b0 0%, #e3e2dd 500px);
+	background:linear-gradient(top, #b3b3b0 0%,#e3e2dd 500px);
+	background-color:#e3e2dd;
+	background-repeat:no-repeat;
+	margin:0
+}
 .play-item {
 	padding-bottom: 5px;
 }
@@ -127,4 +139,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 .rolename {
 }
 .portrait {
+}
+.gdadb-content {
+	-moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.7);
+	-webkit-box-shadow: 0px 0px 8px rgba(0,0,0,0.7);
+	box-shadow: 0px 0px 8px rgba(0,0,0,0.7);
+	background-color: #fff;
+	color: #333;
 }

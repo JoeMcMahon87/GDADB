@@ -6,34 +6,36 @@ html
     link(rel='stylesheet', href='../assets/css/styles.css')
   body(ng-controller='appCtrl')
     header
-      div.container-fluid.gdadb-background
+      div.container-fluid
         form(name='playSearch', action='/search')
-          div.row-fluid
-            div.col-sm-12
-              div.row-fluid.gdadb-header
-                div.col-sm-2.gdadb-logo
-                  | GDADB
-                div.col-sm-8.gdadb-controls
-                  div.row.gdadb-buttons
-                    div.col-sm-8.gdadb-control-wrapper
-                      input.form-control.gdadb-search-box(type='text',name='search', id='search', placeholder='Find plays, cast, crew, and more...', ng-model='formData.search')
-                    div.col-sm-2.gdadb-control-wrapper
-                      select.form-control(name='type', id='type',ng-model='formData.type')
-                        option(id='All', value='All') All
-                    div.col-sm-2.gdadb-control-wrapper
-                      button.form-control.btn.btn-primary.btn-sm(style="margin-bottom:10px; ", type='submit', ng-click='submitted=true') Search
-                  div.row.gdadb-menu-row
-                    div.col-sm-3
-                      a(href='/add') Plays v
-                    div.col-sm-3
-                      a(href='/castcrew') Cast and Crew v
-                    div.col-sm-3
-                      a(href='/news') News v
-                    div.col-sm-3
-                      a(href='/list') Watchlist v
-                div.col-sm-2.gdadb-social-media
-                  | Social Media
-    block content
+          div.col-sm-8.col-sm-offset-2
+            div.row-fluid
+              div.col-sm-12.gdadb-background
+                div.row-fluid
+                  div.col-sm-2.gdadb-logo.gdadb-header
+                    | GDADB
+                  div.col-sm-8.gdadb-controls.gdadb-header
+                    div.row.gdadb-buttons
+                      div.col-sm-8.gdadb-control-wrapper
+                        input.form-control.gdadb-search-box(type='text',name='search', id='search', placeholder='Find plays, cast, crew, and more...', ng-model='formData.search')
+                      div.col-sm-2.gdadb-control-wrapper
+                        select.form-control(name='type', id='type',ng-model='formData.type')
+                          option(id='All', value='All') All
+                      div.col-sm-2.gdadb-control-wrapper
+                        button.form-control.btn.btn-primary.btn-sm(style="margin-bottom:10px; ", type='submit', ng-click='submitted=true') Search
+                    div.row.gdadb-menu-row
+                      div.col-sm-3
+                        a(href='/add') Plays v
+                      div.col-sm-3
+                        a(href='/castcrew') Cast and Crew v
+                      div.col-sm-3
+                        a(href='/news') News v
+                      div.col-sm-3
+                        a(href='/list') Watchlist v
+                  div.col-sm-2.gdadb-social-media.gdadb-header
+                    | Social Media
+             div.row-fluid.gdadb-content 
+               block content
 
     script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js')
     script(type='text/javascript', src='../controllers/app.js')
