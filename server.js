@@ -3,7 +3,9 @@ var express = require('express');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var hbs = require('handlebars');
+var passport = require('passport');
+var expressSession = require('express-session');
+var flash = require('connect-flash');
 
 // Configs
 var db = require('./config/db');
@@ -30,6 +32,26 @@ app.use(bodyParser.urlencoded({
 
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/public/views');
+
+app.use(expressSession({secret: 'gdadbSecret'}));
+passport.serializeUser(function(user, done) {
+  done(null, user._id);
+});
+ 
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+var loginStrategy = require('./passport/login.js');
+loginStrategy(passport);
+var registerStrategy = require('./passport/register.js');
+registerStrategy(passport);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use(flash());
 
 // Express Routes
 require('./app/routes/api')(app);

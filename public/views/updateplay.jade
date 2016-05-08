@@ -1,0 +1,107 @@
+extend layout
+block content
+  div.col-sm-12.gdadb-content
+    div(ng-controller="myApp")
+      form(sf-schema="playschema" sf-form="form" sf-model="model")
+
+<div class="reformed-form">
+	<form method="post" name="updatePlay" id="updatePlay" action="action" enctype="multipart/form-data">
+		<dl>
+			<dt>
+				<label for="_id">Title</label>
+			</dt>
+			<dd><input type="text" id="_id" class="required" name="_id" autocomplete="off" style="cursor: auto;" /></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="Keywords">Keywords</label>
+			</dt>
+			<dd><input type="text" id="Keywords" name="Keywords" /></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="Season">Season</label>
+			</dt>
+			<dd>
+				<select size="1" name="Season" id="Season">
+					<option value="Fall">Fall</option>
+					<option value="Spring">Spring</option>
+				</select>
+			</dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="Year">Year</label>
+			</dt>
+			<dd><input type="text" id="Year" class="digits" name="Year" /></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="PlaybillImage">PlayImage</label>
+			</dt>
+			<dd><input type="file" id="PlaybillImage" name="PlaybillImage" accept=".gif,.png,.jpg" /></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="Description">Description</label>
+			</dt>
+			<dd><textarea id="Description" name="Description" rows="5" cols="50">
+</textarea></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="Producers">Producer(s)</label>
+			</dt>
+			<dd><input type="text" id="Producers" name="Producers" /></dd>
+		</dl>
+		<dl>
+			<dt>
+				<label for="Directors">Director(s)</label>
+			</dt>
+			<dd><input type="text" id="Directors" name="Directors" /></dd>
+		</dl>
+		<fieldset>
+			<legend>Cast</legend>
+			<dl>
+				<dt>
+					<label for="CrewName">Name</label>
+				</dt>
+				<dd><input type="text" id="CrewName" name="CrewName" /></dd>
+			</dl>
+			<dl>
+				<dt>
+					<label for="CastRole">Role</label>
+				</dt>
+				<dd><input type="text" id="CastRole" name="CastRole" /></dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Crew</legend>
+			<dl>
+				<dt>
+					<label for="CastName">Name</label>
+				</dt>
+				<dd><input type="text" id="CastName" name="CastName" /></dd>
+			</dl>
+			<dl>
+				<dt>
+					<label for="CastRole">Role</label>
+				</dt>
+				<dd><input type="text" id="CastRole" name="CastRole" /></dd>
+			</dl>
+		</fieldset>
+		<fieldset>
+			<legend>Performances</legend>
+			<dl>
+				<dt>
+					<label for="PerformanceDate">Performance Date</label>
+				</dt>
+				<dd><input type="text" id="PerformanceDate" class="datepicker date" name="PerformanceDate" /></dd>
+			</dl>
+		</fieldset>
+		<div id="submit_buttons">
+			<button type="submit">Submit</button>
+		</div>
+		</form>
+</div>
+

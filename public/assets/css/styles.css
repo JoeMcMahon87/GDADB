@@ -50,7 +50,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 .gdadb-logo {
 	height: 100px;
 	line-height: 100px;
-	text-align: center;
+	background-image: url("../images/gdadb.png");
+	background-repeat: no-repeat;
+	background-position: center center;
 }
 .gdadb-search {
 	height: 40px;
@@ -67,9 +69,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	height: 40px;
 	line-height: 40px;
 	text-align: center;
-}
-
-	line-height: 40px;
 }
 .gdadb-controls {
 	height: 100px;
@@ -102,7 +101,11 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	background: rgba(76,76,76,1);
         color: #ddd;
 }
+.title {
+	margin: 5px;
+}
 .subtitle {
+	margin: 5px;
 	font-size: 0.8em;
         color: #aaa;
 }
@@ -110,35 +113,51 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	min-height: 272px;
 	height: 100%;
 	width: 100%;
+	margin: auto;
+	display: block;
+}
+.centered {
+	margin-left: auto;
+	margin-right: auto;
+	display: inline-block;
+	text-align: center;
+	vertical-align: middle;
 }
 .main-photo {
-        min-height: 272px;
-	height: 100%;
-	width: 100%;
+	max-height: 374px;
+	max-width: 515px;
 }
 .summary-area {
-	border: 1px solid black;
+	border-top: 1px solid #ccc;
 }
 .bold {
 	font-weight: bold;
 }
 .gray {
-	color: #ccc;
+	color: #666;
 }
 .awards-area {
-	border: 1px solid black;
+	border-top: 1px solid #ccc;
 }
 .cast-line {
 }
 .headshot {
 }
 .castname {
+	vertical-align: middle;
+	line-height: 44px;
 }
 .spacer {
+	vertical-align: middle;
+	line-height: 44px;
 }
 .rolename {
+	vertical-align: middle;
+	line-height: 44px;
 }
 .portrait {
+	height: 44px;
+	width: 32px;
 }
 .gdadb-content {
 	-moz-box-shadow: 0px 0px 8px rgba(0,0,0,0.7);
@@ -146,4 +165,10 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	box-shadow: 0px 0px 8px rgba(0,0,0,0.7);
 	background-color: #fff;
 	color: #333;
+}
+.padded {
+	margin: 5px;
+}
+.cast-crew-area {
+	border-top: 1px solid #ccc;
 }

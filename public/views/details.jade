@@ -2,44 +2,47 @@ extend layout
 block content
   div.col-sm-12.gdadb-content
     div.row.title-area
-      h1 Title of the Play
-      span.subtitle
-        | Keywords | Performance Season
+      div.title
+        h1
+          | #{play._id}
+      div.subtitle
+        | #{play.keywords} | #{play.performance_season}
     div.row
-      div.col-sm-4
-        img.play-poster(src="", alt="Play poster")
-      div.col-sm-6
-        img.main-photo(src="", alt="Main photo")
+      div.col-sm-4.centered
+        img.play-poster(src="../assets/images/#{play.poster_url}", alt="#{play._id}")
+      div.col-sm-8.centered
+        img.main-photo(src="../assets/images/woo-hof.jpg", alt="Main photo")
     div.row.summary-area
-      p.summary
-        | Summary of the play
-      p
-        span.bold.gray Producer(s):
-        | Paul Buckley, Meghan Goldsmith 
-      p
-        span.bold.gray Director(s):
-        | Allan L'Etoille
+      div.padded
+        p.summary
+          | #{summary}
+        p
+          span.bold.gray Producer(s):
+          |  #{producers} 
+        p
+          span.bold.gray Director(s):
+          |  #{directors}
     div.row.awards-area
       Awards Section - GDA HoF ?
     div.row.cast-crew-area
-      h2 Cast
-      div.row.cast-line
-        div.col-sm-2.headshot
-          img.portait(src="", alt="HEAD")
-        div.col-sm-4.castname
-          | John Doe
-        div.col-sm-1.spacer
-          | ...
-        div.col-sm-5.rolename
-          | Role 
+      h2.padded Cast
+        div.row.padded.cast-line
+          div.col-sm-2.headshot
+            img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
+          div.col-sm-4.castname
+            | {p.name}
+          div.col-sm-1.spacer
+            | ...
+          div.col-sm-5.rolename
+            | {p.role} 
     div.row
-      h2 Crew
-      div.row.cast-line
-        div.col-sm-2.headshot
-          img.portait(src="", alt="HEAD")
-        div.col-sm-4.castname
-          | John Doe
-        div.col-sm-1.spacer
-          | ...
-        div.col-sm-5.rolename
-          | Role 
+      h2.padded Crew
+        div.row.padded.cast-line
+          div.col-sm-2.headshot
+            img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
+          div.col-sm-4.castname
+            | {p.name}
+          div.col-sm-1.spacer
+            | ...
+          div.col-sm-5.rolename
+            | {p.role} 

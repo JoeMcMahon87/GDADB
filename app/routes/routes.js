@@ -2,13 +2,40 @@
 // They respect a last declared hiearchy, so the ones defined at
 // the bottom may override the ones at the top.
 var mongoose = require('mongoose'),
+    express = require('express'),
+    passport = require('passport'),
     Play = require('../models/play');
 
+var isAuthenticated = function(req, res, next) {
+	if (req.isAuthenticated())
+		return next();
+	res.redirect('/');
+}
+
 module.exports = function(app) {
-	
+	app.post('/login', passport.authenticate('login', {
+		successRedirect: '/test',
+		failureRedirect: '/',
+		failureFlash: true
+	}));
+
+	app.get('/register', function(req, res) {
+		res.render('register', { message: req.flash('message') });
+	});
+
+	app.post('/register', passport.authenticate('register', {
+		successRedirect: '/',
+		failureRedirect: '/register',
+		failureFlash: true
+	}));
+
+	app.get('/signout', function(req, res) {
+		req.logout();
+		res.redirect('/');
+	});
+
 	// Test route to with request and response
 	app.get('/test', function(req, res) {
-		
 		// Writing to the Header of the response
 		res.writeHead(200);
 		
@@ -31,13 +58,23 @@ module.exports = function(app) {
 	app.get('/details/:id', function(req, res) {
 		var playId = req.params.id;
 		Play.findOne({ '_id' : req.params.id}, function(err, play) {
-			res.render('details', play);
-			//res.sendFile('public/views/details.html', { root: '/home/jmcmahon/gdadb/'});
+			res.render('details', { play : play, producers: "", directors: "", cast: [], crew: [] });
 		});
 	});
 
 	app.get('/add', function(req, res) {
 		res.sendFile('public/views/addplay.html', { root: '/home/jmcmahon/gdadb/'});
+	});
+
+        app.get('/update/:id', isAuthenticatied, function(req, res) {
+		var playId = req.params.id;
+		Play.findOne({ '_id' : req.params.id}, function(err, play) {
+			res.render('updateplay', { play : play, producers: "", directors: "", cast: [], crew: [] });
+		});
+	});
+
+	app.get('/signin', function(req, res) {
+		res.render('signin', { } );
 	});
 
 	// Wildcard route serving static html page

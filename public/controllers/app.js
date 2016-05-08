@@ -54,4 +54,5 @@ myApp.controller('appCtrl', function appCtrl($scope, $http, $location) {
 				console.log("Error: " + data);
 			});
 	};
+
 });
