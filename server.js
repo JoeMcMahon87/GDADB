@@ -34,6 +34,8 @@ app.set('view engine', 'jade');
 app.set('views', __dirname + '/public/views');
 
 app.use(expressSession({secret: 'gdadbSecret'}));
+
+var User = require('./app/models/user');
 passport.serializeUser(function(user, done) {
   done(null, user._id);
 });

@@ -1,3 +1,12 @@
+var LocalStrategy   = require('passport-local').Strategy;
+var User = require('../app/models/user');
+var bCrypt = require('bcrypt-nodejs');
+
+// Generates hash using bCrypt
+var createHash = function(password){
+ return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+}
+
 module.exports = function(passport){
   passport.use('signup', new LocalStrategy({
     passReqToCallback : true

@@ -14,7 +14,7 @@ var isAuthenticated = function(req, res, next) {
 
 module.exports = function(app) {
 	app.post('/login', passport.authenticate('login', {
-		successRedirect: '/test',
+		successRedirect: '/',
 		failureRedirect: '/',
 		failureFlash: true
 	}));
@@ -23,7 +23,7 @@ module.exports = function(app) {
 		res.render('register', { message: req.flash('message') });
 	});
 
-	app.post('/register', passport.authenticate('register', {
+	app.post('/register', passport.authenticate('signup', {
 		successRedirect: '/',
 		failureRedirect: '/register',
 		failureFlash: true
@@ -34,31 +34,19 @@ module.exports = function(app) {
 		res.redirect('/');
 	});
 
-	// Test route to with request and response
-	app.get('/test', function(req, res) {
-		// Writing to the Header of the response
-		res.writeHead(200);
-		
-		// Writing to the body of the response using Writeable interface
-		// Look it takes HTML!
-		res.write('<h1>I\'m HTML!</h1>');
-		// Must always end the Writeable stream 
-		res.end();
-	});
-
 	app.get('/search', function(req, res) {
 		var queryType = req.query.type;
 		queryTerm = {'$text':{'$search':req.query.search}};
 		Play.find(queryTerm)
 			.sort('_id').exec(function(err, plays) {
-				res.render('index', { plays : plays });
+				res.render('index', { plays : plays, auth : req.isAuthenticated() });
 		});
 	});
 
 	app.get('/details/:id', function(req, res) {
 		var playId = req.params.id;
 		Play.findOne({ '_id' : req.params.id}, function(err, play) {
-			res.render('details', { play : play, producers: "", directors: "", cast: [], crew: [] });
+			res.render('details', { play : play, producers: "", directors: "", cast: [], crew: [], auth : req.isAuthenticated() });
 		});
 	});
 
@@ -66,10 +54,10 @@ module.exports = function(app) {
 		res.sendFile('public/views/addplay.html', { root: '/home/jmcmahon/gdadb/'});
 	});
 
-        app.get('/update/:id', isAuthenticatied, function(req, res) {
+        app.get('/update/:id', isAuthenticated, function(req, res) {
 		var playId = req.params.id;
 		Play.findOne({ '_id' : req.params.id}, function(err, play) {
-			res.render('updateplay', { play : play, producers: "", directors: "", cast: [], crew: [] });
+			res.render('updateplay', { play : play, producers: "", directors: "", cast: [], crew: [], auth : req.isAuthenticated() });
 		});
 	});
 
@@ -81,7 +69,7 @@ module.exports = function(app) {
 	app.get('*', function(req, res) {
 		// Displaying an already made view
 		Play.find(function(err,plays) {
-			res.render('index', { title: 'TEST', plays : plays } );
+			res.render('index', { title: 'TEST', plays : plays, auth : req.isAuthenticated() } );
 		});
 		//res.sendFile('public/views/index.html', { root: '/home/jmcmahon/gdadb/'});
 	});

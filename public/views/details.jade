@@ -2,11 +2,15 @@ extend layout
 block content
   div.col-sm-12.gdadb-content
     div.row.title-area
-      div.title
-        h1
-          | #{play._id}
-      div.subtitle
-        | #{play.keywords} | #{play.performance_season}
+      div.col-sm-11
+        div.title
+          h1
+            | #{play._id}
+        div.subtitle
+          | #{play.keywords} | #{play.performance_season}
+      div.col-sm-1.editctrl
+        if auth
+          span.menulink(onclick="window.location='/update/#{play._id}'") Edit
     div.row
       div.col-sm-4.centered
         img.play-poster(src="../assets/images/#{play.poster_url}", alt="#{play._id}")

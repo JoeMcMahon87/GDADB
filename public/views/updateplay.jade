@@ -3,105 +3,87 @@ block content
   div.col-sm-12.gdadb-content
     div(ng-controller="myApp")
       form(sf-schema="playschema" sf-form="form" sf-model="model")
-
-<div class="reformed-form">
-	<form method="post" name="updatePlay" id="updatePlay" action="action" enctype="multipart/form-data">
-		<dl>
-			<dt>
-				<label for="_id">Title</label>
-			</dt>
-			<dd><input type="text" id="_id" class="required" name="_id" autocomplete="off" style="cursor: auto;" /></dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="Keywords">Keywords</label>
-			</dt>
-			<dd><input type="text" id="Keywords" name="Keywords" /></dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="Season">Season</label>
-			</dt>
-			<dd>
-				<select size="1" name="Season" id="Season">
-					<option value="Fall">Fall</option>
-					<option value="Spring">Spring</option>
-				</select>
-			</dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="Year">Year</label>
-			</dt>
-			<dd><input type="text" id="Year" class="digits" name="Year" /></dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="PlaybillImage">PlayImage</label>
-			</dt>
-			<dd><input type="file" id="PlaybillImage" name="PlaybillImage" accept=".gif,.png,.jpg" /></dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="Description">Description</label>
-			</dt>
-			<dd><textarea id="Description" name="Description" rows="5" cols="50">
-</textarea></dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="Producers">Producer(s)</label>
-			</dt>
-			<dd><input type="text" id="Producers" name="Producers" /></dd>
-		</dl>
-		<dl>
-			<dt>
-				<label for="Directors">Director(s)</label>
-			</dt>
-			<dd><input type="text" id="Directors" name="Directors" /></dd>
-		</dl>
-		<fieldset>
-			<legend>Cast</legend>
-			<dl>
-				<dt>
-					<label for="CrewName">Name</label>
-				</dt>
-				<dd><input type="text" id="CrewName" name="CrewName" /></dd>
-			</dl>
-			<dl>
-				<dt>
-					<label for="CastRole">Role</label>
-				</dt>
-				<dd><input type="text" id="CastRole" name="CastRole" /></dd>
-			</dl>
-		</fieldset>
-		<fieldset>
-			<legend>Crew</legend>
-			<dl>
-				<dt>
-					<label for="CastName">Name</label>
-				</dt>
-				<dd><input type="text" id="CastName" name="CastName" /></dd>
-			</dl>
-			<dl>
-				<dt>
-					<label for="CastRole">Role</label>
-				</dt>
-				<dd><input type="text" id="CastRole" name="CastRole" /></dd>
-			</dl>
-		</fieldset>
-		<fieldset>
-			<legend>Performances</legend>
-			<dl>
-				<dt>
-					<label for="PerformanceDate">Performance Date</label>
-				</dt>
-				<dd><input type="text" id="PerformanceDate" class="datepicker date" name="PerformanceDate" /></dd>
-			</dl>
-		</fieldset>
-		<div id="submit_buttons">
-			<button type="submit">Submit</button>
-		</div>
-		</form>
-</div>
+        dl
+          dt
+            label(for="_id") Title
+          dd
+            input.lrg(type="text", id="_id", class="required", name="_id", autocomplete="off", style="cursor:auto", value="#{play._id}")
+        dl
+          dt
+            label(for="Keywords") Keywords
+          dd
+            input.lrg(type="text", id="Keywords", name="Keywords", value="#{play.Keywords}")
+        dl
+          dt
+            label(for="Season") Season
+          dd
+            select.sml(size="1", name="Season", id="Season")
+              option(value="Fall") Fall
+              option(value="Spring") Spring
+        dl
+          dt
+            label(for="Year") Year
+          dd
+            input.sml(type="Text", id="Year", class="digits", name="Year")
+        dl
+          dt
+            label(for="PlaybillImage") Playbill Image
+          dd
+            input(type="file", id="PlaybillImage", name="PlaybillImage", accept=".gif,.png,.jpg")
+        dl
+          dt
+            label(for="Description") Description
+          dd
+            textarea(id="Description", name="Description", rows="5", cols="80")
+        dl
+          dt
+            label(for="Directors") Director(s)
+          dd
+            input.lrg(type="text", id="Directors", name="Directors")
+        dl
+          dt
+            label(for="Producers") Producer(s)
+          dd
+            input.lrg(type="text", id="Producers", name="Producers")
+        fieldset
+          legend Cast
+          button Add new cast member
+          br
+          dl.left
+            dt
+              label(for="CastName") Cast Member Name
+            dd
+              input.lrg(type="text", id="CastName", name="CastName")
+          dl.left
+            dt
+              label(for="CastRole") Cast Member Role
+            dd
+              input.lrg(type="text", id="CastRole", name="CastRole")
+              button.pad10left     Save
+        fieldset
+          legend Crew
+          button Add new crew member
+          br
+          dl.left
+            dt
+              label(for="CrewName") Crew Member Name
+            dd
+              input.lrg(type="text", id="CrewName", name="CrewName")
+          dl.left
+            dt
+              label(for="CrewRole") Crew Member Role
+            dd
+              input.lrg(type="text", id="CrewRole", name="CrewRole")
+              button.pad10left     Save
+        fieldset
+          legend Performances
+          dl
+            label(for="PerformanceDate") Performance Date
+          dd
+            input(type="text", id="PerformanceDate", name="PerformanceDate")
+            button Add new date
+        br
+        br
+        div(id=submit_button)
+          button(type="submit") Submit
 

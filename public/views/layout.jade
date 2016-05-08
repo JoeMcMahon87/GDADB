@@ -25,13 +25,16 @@ html
                           button.form-control.btn.btn-primary.btn-sm(style="margin-bottom:10px; ", type='submit', ng-click='submitted=true') Search
                       div.row.gdadb-menu-row
                         div.col-sm-3
-                          a(href='/add') Plays
+                          span.menulink(onclick='window.location="/add"') Plays
                         div.col-sm-3
-                          a(href='/castcrew') Cast and Crew
+                          span.menulink(onclick='window.location="/castcrew"') Cast and Crew
                         div.col-sm-3
-                          a(href='/news') News
+                          span.menulink(onclick='window.location="/news"') News
                         div.col-sm-3
-                          a(href='/signin') Sign In
+                          if auth
+                            span.menulink(onclick="window.location='/signout'") Sign Out
+                          else
+                            span.menulink(onclick='window.location="/signin"') Sign In
                   div.col-sm-2.gdadb-social-media.gdadb-header
                     | Social Media
              div.row-fluid.gdadb-content 

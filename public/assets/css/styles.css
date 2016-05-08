@@ -172,3 +172,27 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 .cast-crew-area {
 	border-top: 1px solid #ccc;
 }
+.editctrl {
+	margin: auto;
+	vertical-align: middle;
+	line-height: 89px;
+}
+.left {
+	float: left;
+}
+.lrg {
+	width: 300px;
+}
+.sml {
+	width: 150px;
+}
+.pad10left {
+	margin-left: 10px;
+}
+a {
+	color: #551A8B;
+}
+.menulink {
+	color: #eee;
+	cursor: pointer;
+}
