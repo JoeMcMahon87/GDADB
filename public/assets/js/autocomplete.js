@@ -13,3 +13,5 @@ $.ui.autocomplete.prototype._renderItem = function (ul, item) {
         .append("<a>" + t + "</a>")
         .appendTo(ul);
 };
+});
+

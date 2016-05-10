@@ -47,7 +47,7 @@ block content
             input.lrg(type="text", id="Producers", name="Producers")
         fieldset
           legend Cast
-          button Add new cast member
+          button.btn.btn-info(type="button", id="addcast", name="addcast", data-toggle="modal", data-target="#addCastMember") Add new cast member
           br
           dl.left
             dt
@@ -62,7 +62,7 @@ block content
               button.pad10left     Save
         fieldset
           legend Crew
-          button Add new crew member
+          button(id="addcrew", name="addcrew") Add new crew member
           br
           dl.left
             dt
@@ -86,6 +86,30 @@ block content
         br
         div(id=submit_button)
           button(type="submit") Submit
+      div.modal.fade(id="addCastMember", role="dialog")
+        div.modal-dialog
+          div.modal-content
+            form(id="newcast", name="newcast")
+              div.modal-header
+                h3 Add New Cast Member
+              div.modal-body
+                dl
+                  dt
+                    label(for="CastMemberName") Cast Member Name
+                  dd
+                    input.ui-front.lrg(type="text", id="CastMemberName", name="CastMemberName", placeholder="Last Name, First")
+                dl
+                  dt
+                    label(for="CastMemberYear") Graduation Year
+                  dd
+                    input.lrg(type="text", id="GradYear", name="GradYear", placeholder="YYYY")
+                dl
+                  dt
+                    label(for="CastMemberSchool") Cast Member's School
+                  dd
+                    input.lrg(type="text", id="CastMemberSchool", name="CastMemberSchool")
+              div.modal-footer  
+                button.btn.btn-default(name="newpersonsubmit", id="newpersonsubmit", type="button" data-dismiss="modal") Save
 block scripts
   script.
     $( "#CastName" ).autocomplete({
@@ -118,4 +142,53 @@ block scripts
       close: function() {
         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
+    });
+    
+    $( "#CastMemberSchool" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item.School
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $("#newpersonsubmit").on('click', function(e) {
+      console.log("HERE");
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#CastMemberName").val(),
+          year: $("#GradYear").val(),
+          school: $("#CastMemberSchool").val()
+        },
+        success: function(data) {
+          alert("Added new person");
+        } 
+      });
     });

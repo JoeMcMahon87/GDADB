@@ -66,18 +66,29 @@ module.exports = function(app) {
 		res.render('signin', { } );
 	});
 
+	app.post('/api/addperson', isAuthenticated, function(req, res) {
+		console.log(JSON.stringify(req.body));
+	});
+
 	app.get('/api/castname', isAuthenticated, function(req, res) {
-		var joe = new Contrib();
-		joe._id = 'McMahon, Joe';
-		joe.GraduationYear = 1987;
-		joe.School = 'Gonzaga';
-		joe.save();
-		console.log('Search for ' + req.query.q);
-		Contrib.find(function(err, people) {
-			console.log(people);
+		var queryTerm = {'_id':{'$regex':req.query.q,"$options":"i"}};
+		Contrib.find(queryTerm, function(err, people) {
 			if (people) {
 				res.type('application/json');
 				res.jsonp(people);
+			} else {
+				console.log("No results");
+			}
+		});
+	});
+
+	app.get('/api/school', isAuthenticated, function(req, res) {
+		var queryTerm = {'School' : { "$regex" : req.query.q, "$options":"i"}};
+		Contrib.find(queryTerm, function(err, schools) {
+console.log(JSON.stringify(schools));
+			if (schools) {
+				res.type('application/json');
+				res.jsonp(schools);
 			} else {
 				console.log("No results");
 			}
