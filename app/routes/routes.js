@@ -4,6 +4,7 @@
 var mongoose = require('mongoose'),
     express = require('express'),
     passport = require('passport'),
+    Contrib = require('../models/contrib'),
     Play = require('../models/play');
 
 var isAuthenticated = function(req, res, next) {
@@ -63,6 +64,24 @@ module.exports = function(app) {
 
 	app.get('/signin', function(req, res) {
 		res.render('signin', { } );
+	});
+
+	app.get('/api/castname', isAuthenticated, function(req, res) {
+		var joe = new Contrib();
+		joe._id = 'McMahon, Joe';
+		joe.GraduationYear = 1987;
+		joe.School = 'Gonzaga';
+		joe.save();
+		console.log('Search for ' + req.query.q);
+		Contrib.find(function(err, people) {
+			console.log(people);
+			if (people) {
+				res.type('application/json');
+				res.jsonp(people);
+			} else {
+				console.log("No results");
+			}
+		});
 	});
 
 	// Wildcard route serving static html page
