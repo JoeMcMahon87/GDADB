@@ -5,13 +5,13 @@ Schema = mongoose.Schema;
 
 var PlayRoleSchema = new Schema ({
     // "Warman, John"
-    ContribName : String,
+    contribname : String,
     // "director"
-    ContribClass : String,
+    contribclass : String,
     // "Damn Yankees (1986)"
-    PlayID : String,
+    playID : String,
     // "Directed"
-    ContribRole : String
+    contribrole : String
 });
 
 module.exports = mongoose.model('PlayRole', PlayRoleSchema);

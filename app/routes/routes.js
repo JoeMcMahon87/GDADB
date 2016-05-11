@@ -6,6 +6,7 @@ var mongoose = require('mongoose'),
     passport = require('passport'),
     Contrib = require('../models/contrib'),
     Play = require('../models/play');
+    PlayRole = require('../models/playrole');
 
 var isAuthenticated = function(req, res, next) {
 	if (req.isAuthenticated())
@@ -77,6 +78,26 @@ module.exports = function(app) {
 		person.save(function(err) {
 			if (err) {
 				console.log(err);
+				res.send(err);
+			} else {
+				res.send("");
+			}
+		});
+	});
+
+	app.post('/api/addrole', isAuthenticated, function(req, res) {
+		var role = new PlayRole({
+			contribname : req.body.name,
+			contribclass : req.body.year,
+			playID : req.body.play,
+			contribrole : req.body.role
+		});
+		role.save(function(err) {
+			if (err) {
+				console.log(err);
+				res.send(err);
+			} else {
+				res.send("");
 			}
 		});
 	});
@@ -96,7 +117,6 @@ module.exports = function(app) {
 	app.get('/api/school', isAuthenticated, function(req, res) {
 		var queryTerm = {'school' : { "$regex" : req.query.q, "$options":"i"}};
 		Contrib.distinct('school', queryTerm, function(err, schools) {
-console.log(JSON.stringify(schools));
 			if (schools) {
 				res.type('application/json');
 				res.jsonp(schools);
