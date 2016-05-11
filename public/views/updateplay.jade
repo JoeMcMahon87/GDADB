@@ -147,7 +147,6 @@ block scripts
           },
 
           success: function( data ) {
-            console.log("CAST: " + JSON.stringify(data));
             response( $.map(data, function(item) {
         	  return {
         	    label: item
@@ -181,7 +180,72 @@ block scripts
           },
 
           success: function( data ) {
-            console.log("CREW: " + JSON.stringify(data));
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#castmemberschool" ).autocomplete({
+      appendTo: "castmemberschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#crewmemberschool" ).autocomplete({
+      appendTo: "crewmemberschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
             response( $.map(data, function(item) {
         	  return {
         	    label: item

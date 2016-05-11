@@ -94,8 +94,8 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/school', isAuthenticated, function(req, res) {
-		var queryTerm = {'School' : { "$regex" : req.query.q, "$options":"i"}};
-		Contrib.distinct('School', queryTerm, function(err, schools) {
+		var queryTerm = {'school' : { "$regex" : req.query.q, "$options":"i"}};
+		Contrib.distinct('school', queryTerm, function(err, schools) {
 console.log(JSON.stringify(schools));
 			if (schools) {
 				res.type('application/json');
