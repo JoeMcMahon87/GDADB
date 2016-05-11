@@ -10,77 +10,77 @@ block content
             input.lrg(type="text", id="_id", class="required", name="_id", autocomplete="off", style="cursor:auto", value="#{play._id}")
         dl
           dt
-            label(for="Keywords") Keywords
+            label(for="keywords") keywords
           dd
-            input.lrg(type="text", id="Keywords", name="Keywords", value="#{play.Keywords}")
+            input.lrg(type="text", id="keywords", name="keywords", value="#{play.keywords}")
         dl
           dt
-            label(for="Season") Season
+            label(for="season") season
           dd
-            select.sml(size="1", name="Season", id="Season")
+            select.sml(size="1", name="season", id="season")
               option(value="Fall") Fall
               option(value="Spring") Spring
         dl
           dt
-            label(for="Year") Year
+            label(for="year") year
           dd
-            input.sml(type="Text", id="Year", class="digits", name="Year")
+            input.sml(type="Text", id="year", class="digits", name="year")
         dl
           dt
-            label(for="PlaybillImage") Playbill Image
+            label(for="playbillimage") Playbill Image
           dd
-            input(type="file", id="PlaybillImage", name="PlaybillImage", accept=".gif,.png,.jpg")
+            input(type="file", id="playbillimage", name="playbillimage", accept=".gif,.png,.jpg")
         dl
           dt
-            label(for="Description") Description
+            label(for="description") description
           dd
-            textarea(id="Description", name="Description", rows="5", cols="80")
+            textarea(id="description", name="description", rows="5", cols="80")
         dl
           dt
-            label(for="Directors") Director(s)
+            label(for="directors") Director(s)
           dd
-            input.lrg(type="text", id="Directors", name="Directors")
+            input.lrg(type="text", id="directors", name="directors")
         dl
           dt
-            label(for="Producers") Producer(s)
+            label(for="producers") Producer(s)
           dd
-            input.lrg(type="text", id="Producers", name="Producers")
+            input.lrg(type="text", id="producers", name="producers")
         fieldset
           legend Cast
           button.btn.btn-info(type="button", id="addcast", name="addcast", data-toggle="modal", data-target="#addCastMember") Add new cast member
           br
           dl.left
             dt
-              label(for="CastName") Cast Member Name
+              label(for="castname") Cast Member Name
             dd
-              input.lrg(type="text", id="CastName", name="CastName", placeholder="Last Name, First")
+              input.lrg(type="text", id="castname", name="castname", placeholder="Last Name, First")
           dl.left
             dt
-              label(for="CastRole") Cast Member Role
+              label(for="castrole") Cast Member Role
             dd
-              input.lrg(type="text", id="CastRole", name="CastRole")
+              input.lrg(type="text", id="castrole", name="castrole")
               button.pad10left     Save
         fieldset
           legend Crew
-          button(id="addcrew", name="addcrew") Add new crew member
+          button.btn.btn-info(type="button", id="addcrew", name="addcrew", data-toggle="modal", data-target="#addCrewMember") Add new crew member
           br
           dl.left
             dt
-              label(for="CrewName") Crew Member Name
+              label(for="crewname") Crew Member Name
             dd
-              input.lrg(type="text", id="CrewName", name="CrewName", placeholder="Last Name, First")
+              input.lrg(type="text", id="crewname", name="crewname", placeholder="Last Name, First")
           dl.left
             dt
-              label(for="CrewRole") Crew Member Role
+              label(for="crewrole") Crew Member Role
             dd
-              input.lrg(type="text", id="CrewRole", name="CrewRole")
+              input.lrg(type="text", id="crewrole", name="crewrole")
               button.pad10left     Save
         fieldset
           legend Performances
           dl
-            label(for="PerformanceDate") Performance Date
+            label(for="performancedate") Performance Date
           dd
-            input(type="text", id="PerformanceDate", name="PerformanceDate")
+            input(type="text", id="performancedate", name="performancedate")
             button Add new date
         br
         br
@@ -95,36 +95,62 @@ block content
               div.modal-body
                 dl
                   dt
-                    label(for="CastMemberName") Cast Member Name
+                    label(for="castmembername") Cast Member Name
                   dd
-                    input.ui-front.lrg(type="text", id="CastMemberName", name="CastMemberName", placeholder="Last Name, First")
+                    input.lrg(type="text", id="castmembername", name="castmembername", placeholder="Last Name, First")
                 dl
                   dt
-                    label(for="CastMemberYear") Graduation Year
+                    label(for="gradyear") Graduation year
                   dd
-                    input.lrg(type="text", id="GradYear", name="GradYear", placeholder="YYYY")
+                    input.lrg(type="text", id="gradyear", name="gradyear", placeholder="YYYY")
                 dl
                   dt
-                    label(for="CastMemberSchool") Cast Member's School
+                    label(for="castmemberschool") Cast Member's School
                   dd
-                    input.lrg(type="text", id="CastMemberSchool", name="CastMemberSchool")
+                    input.lrg(type="text", id="castmemberschool", name="castmemberschool")
               div.modal-footer  
                 button.btn.btn-default(name="newpersonsubmit", id="newpersonsubmit", type="button" data-dismiss="modal") Save
+      div.modal.fade(id="addCrewMember", role="dialog")
+        div.modal-dialog
+          div.modal-content
+            form(id="newcrew", name="newcrew")
+              div.modal-header
+                h3 Add New Crew Member
+              div.modal-body
+                dl
+                  dt
+                    label(for="crewmembername") Crew Member Name
+                  dd
+                    input.lrg(type="text", id="crewmembername", name="crewmembername", placeholder="Last Name, First")
+                dl
+                  dt
+                    label(for="crewmemberyear") Graduation year
+                  dd
+                    input.lrg(type="text", id="crewgradyear", name="crewgradyear", placeholder="YYYY")
+                dl
+                  dt
+                    label(for="crewmemberschool") Crew Member's School
+                  dd
+                    input.lrg(type="text", id="crewmemberschool", name="crewmemberschool")
+              div.modal-footer  
+                button.btn.btn-default(name="newpersonsubmit2", id="newpersonsubmit2", type="button" data-dismiss="modal") Save
 block scripts
   script.
-    $( "#CastName" ).autocomplete({
+    $( "#castname" ).autocomplete({
+      appendTo: "castname",
       source: function( request, response ) {
         $.ajax({
-          url: "/api/castname",
+          url: "/api/namesearch",
           dataType: "jsonp",
           data: {
             q: request.term
           },
 
           success: function( data ) {
+            console.log("CAST: " + JSON.stringify(data));
             response( $.map(data, function(item) {
         	  return {
-        	    label: item._id
+        	    label: item
         	  };
             }));
           },
@@ -143,20 +169,22 @@ block scripts
         $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
       }
     });
-    
-    $( "#CastMemberSchool" ).autocomplete({
+
+    $( "#crewname" ).autocomplete({
+      appendTo: "crewname",
       source: function( request, response ) {
         $.ajax({
-          url: "/api/school",
+          url: "/api/namesearch",
           dataType: "jsonp",
           data: {
             q: request.term
           },
 
           success: function( data ) {
+            console.log("CREW: " + JSON.stringify(data));
             response( $.map(data, function(item) {
         	  return {
-        	    label: item.School
+        	    label: item
         	  };
             }));
           },
@@ -177,15 +205,32 @@ block scripts
     });
 
     $("#newpersonsubmit").on('click', function(e) {
-      console.log("HERE");
       e.preventDefault();
       $.ajax({
         url: "/api/addperson",
         type: "POST",
         data: {
-          name: $("#CastMemberName").val(),
-          year: $("#GradYear").val(),
-          school: $("#CastMemberSchool").val()
+          name: $("#castmembername").val(),
+          year: $("#gradyear").val(),
+          school: $("#castmemberschool").val(),
+          bio: ''
+        },
+        success: function(data) {
+          alert("Added new person");
+        } 
+      });
+    });
+
+    $("#newpersonsubmit2").on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#crewmembername").val(),
+          year: $("#crewgradyear").val(),
+          school: $("#crewmemberschool").val(),
+          bio: ''
         },
         success: function(data) {
           alert("Added new person");

@@ -229,5 +229,5 @@ a {
 }
 .ui-autocomplete {
     list-style-type: none;
-    z-index:2147483647;
+    z-index:4000;
 }

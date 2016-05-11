@@ -7,16 +7,16 @@ var ContributorSchema = new Schema ({
     // "Warman, John"
     _id : String,
     // 1957
-    GraduationYear : Number, 
+    graduationyear : Number, 
     // "Gonzaga"
-    School : String,
+    school : String,
     // "John Warman, affectionately known as 'Doc'..."
-    ContributorBio : [String],
+    contributorbio : String,
     // "http://...."
-    PicURL : String
+    picURL : String
 });
 
-ContributorSchema.virtual('ContribName').get(function() {
+ContributorSchema.virtual('contribname').get(function() {
     return this._id;
 });
 

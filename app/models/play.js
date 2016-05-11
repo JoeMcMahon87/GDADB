@@ -7,22 +7,22 @@ var PlaySchema = new Schema ({
     // "Hairspray (2016)"
     _id : String,
     // "Spring" or "Fall"
-    PerformanceSeason : String, 
+    performanceseason : String, 
     // "2016"
-    PerformanceYear : Number,
+    performanceyear : Number,
     // "Comedy", "1970s", ...
-    Genres : [String],
+    genres : [String],
     // "hair", "racism", "dancing", etc.
-    Keywords : [String],
+    keywords : [String],
     // "Balitmore"
-    Locations : [String],
+    locations : [String],
     // 1/1/1970, 1/2/1970, etc.
-    PerformanceDates : [Date],
+    performancedates : [Date],
     // "http://..."
-    ImageURL : String
+    imageURL : String
 });
 
-PlaySchema.virtual('PlayID').get(function() {
+PlaySchema.virtual('playID').get(function() {
     return this._id;
 });
 

@@ -67,12 +67,23 @@ module.exports = function(app) {
 	});
 
 	app.post('/api/addperson', isAuthenticated, function(req, res) {
-		console.log(JSON.stringify(req.body));
+		var person = new Contrib({
+			_id : req.body.name,
+			graduationyear: req.body.year,
+			school: req.body.school,
+			contributorbio: req.body.bio,
+                        picURL: ""
+		});
+		person.save(function(err) {
+			if (err) {
+				console.log(err);
+			}
+		});
 	});
 
-	app.get('/api/castname', isAuthenticated, function(req, res) {
+	app.get('/api/namesearch', isAuthenticated, function(req, res) {
 		var queryTerm = {'_id':{'$regex':req.query.q,"$options":"i"}};
-		Contrib.find(queryTerm, function(err, people) {
+		Contrib.distinct('_id',queryTerm, function(err, people) {
 			if (people) {
 				res.type('application/json');
 				res.jsonp(people);
@@ -84,7 +95,7 @@ module.exports = function(app) {
 
 	app.get('/api/school', isAuthenticated, function(req, res) {
 		var queryTerm = {'School' : { "$regex" : req.query.q, "$options":"i"}};
-		Contrib.find(queryTerm, function(err, schools) {
+		Contrib.distinct('School', queryTerm, function(err, schools) {
 console.log(JSON.stringify(schools));
 			if (schools) {
 				res.type('application/json');
