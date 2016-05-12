@@ -315,8 +315,8 @@ block scripts
         data: {
           name: $("#castname").val(),
           year: $("#castyear").val(),
-          role: $('#castrole').val(),
-          play: $('_id').val()
+          role: 'CAST:' + $('#castrole').val(),
+          play: $('#_id').val()
         },
         success: function(data) {
           alert("Added new role");
@@ -329,10 +329,10 @@ block scripts
         url: "/api/addrole",
         type: "POST",
         data: {
-          name: $("#castname").val(),
+          name: $("#crewname").val(),
           year: $("#crewyear").val(),
-          role: $('#crewrole').val(),
-          play: $('_id').val()
+          role: 'CREW:' + $('#crewrole').val(),
+          play: $('#_id').val()
         },
         success: function(data) {
           alert("Added new role");

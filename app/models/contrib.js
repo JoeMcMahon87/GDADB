@@ -5,7 +5,7 @@ Schema = mongoose.Schema;
 
 var ContributorSchema = new Schema ({
     // "Warman, John"
-    _id : String,
+    name : String,
     // 1957
     graduationyear : Number, 
     // "Gonzaga"

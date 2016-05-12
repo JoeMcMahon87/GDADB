@@ -1,8 +1,16 @@
 // Module for API Routes (serving JSON)
-module.exports = function(app) {
-	var mongoose = require('mongoose'),
-		Play = require('../models/play')
+var mongoose = require('mongoose'),
+	Play = require('../models/play'),
+	PlayRole = require('../models/playrole'),
+	Contrib = require('../models/contrib')
 
+var isAuthenticated = function(req, res, next) {
+	if (req.isAuthenticated())
+		return next();
+	res.redirect('/');
+}
+
+module.exports = function(app) {
 	// Get the Plays
 	app.get('/plays', function(req, res) {
 		Play.find(function(err, plays) {
@@ -63,4 +71,62 @@ module.exports = function(app) {
 		});
 	});
 
+	app.get('/api/namesearch', isAuthenticated, function(req, res) {
+		var queryTerm = {'_id':{'$regex':req.query.q,"$options":"i"}};
+		Contrib.distinct('_id',queryTerm, function(err, people) {
+			if (people) {
+				res.type('application/json');
+				res.jsonp(people);
+			} else {
+				console.log("No results");
+			}
+		});
+	});
+
+	app.post('/api/addperson', isAuthenticated, function(req, res) {
+		var person = new Contrib({
+			name : req.body.name,
+			graduationyear: req.body.year,
+			school: req.body.school,
+			contributorbio: req.body.bio,
+                        picURL: ""
+		});
+		person.save(function(err) {
+			if (err) {
+				console.log(err);
+				res.send(err);
+			} else {
+				res.send("");
+			}
+		});
+	});
+
+	app.post('/api/addrole', isAuthenticated, function(req, res) {
+		var role = new PlayRole({
+			contribname : req.body.name,
+			contribclass : req.body.year,
+			playID : req.body.play,
+			contribrole : req.body.role
+		});
+		role.save(function(err) {
+			if (err) {
+				console.log(err);
+				res.send(err);
+			} else {
+				res.send("");
+			}
+		});
+	});
+
+	app.get('/api/school', isAuthenticated, function(req, res) {
+		var queryTerm = {'school' : { "$regex" : req.query.q, "$options":"i"}};
+		Contrib.distinct('school', queryTerm, function(err, schools) {
+			if (schools) {
+				res.type('application/json');
+				res.jsonp(schools);
+			} else {
+				console.log("No results");
+			}
+		});
+	});
 }

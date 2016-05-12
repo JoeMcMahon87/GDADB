@@ -30,23 +30,26 @@ block content
       Awards Section - GDA HoF ?
     div.row.cast-crew-area
       h2.padded Cast
-        div.row.padded.cast-line
-          div.col-sm-2.headshot
-            img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
-          div.col-sm-4.castname
-            | {p.name}
-          div.col-sm-1.spacer
-            | ...
-          div.col-sm-5.rolename
-            | {p.role} 
+        | #{cast}
+        for person in cast
+          div.row.padded.cast-line
+            div.col-sm-2.headshot
+              img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
+            div.col-sm-4.castname
+              | #{person.contribname}
+            div.col-sm-1.spacer
+              | ...
+            div.col-sm-5.rolename
+              | {person.contribrole} 
     div.row
       h2.padded Crew
-        div.row.padded.cast-line
-          div.col-sm-2.headshot
-            img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
-          div.col-sm-4.castname
-            | {p.name}
-          div.col-sm-1.spacer
-            | ...
-          div.col-sm-5.rolename
-            | {p.role} 
+        for person in crew
+          div.row.padded.cast-line
+            div.col-sm-2.headshot
+              img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
+            div.col-sm-4.castname
+              | #{person.contribname}
+            div.col-sm-1.spacer
+              | ...
+            div.col-sm-5.rolename
+              | #{person.contribrole} 
