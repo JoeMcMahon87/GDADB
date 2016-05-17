@@ -142,6 +142,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 .cast-line {
 }
 .headshot {
+	text-align: center;
 }
 .castname {
 	vertical-align: middle;
@@ -230,4 +231,7 @@ a {
 .ui-autocomplete {
     list-style-type: none;
     z-index:4000;
+}
+.clear {
+    clear: both;
 }

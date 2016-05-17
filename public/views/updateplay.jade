@@ -35,17 +35,23 @@ block content
             label(for="description") description
           dd
             textarea(id="description", name="description", rows="5", cols="80")
-        dl
-          dt
-            label(for="directors") Director(s)
-          dd
-            input.lrg(type="text", id="directors", name="directors")
-        dl
-          dt
-            label(for="producers") Producer(s)
-          dd
-            input.lrg(type="text", id="producers", name="producers")
-        fieldset
+        dl.clear
+          button.btn.btn-info(type="button", id="addproducer", name="addproducer", data-toggle="modal", data-target="#addProducer") Add new producer
+          br
+          dl.left
+            dt
+              label(for="producername") Producer
+            dd
+              input.lrg(type="text", id="producername", name="producername", placeholder="Last Name, First")
+        dl.clear
+          button.btn.btn-info(type="button", id="adddirector", name="adddirector", data-toggle="modal", data-target="#addDirector") Add new director
+          br
+          dl.left
+            dt
+              label(for="directorname") Director
+            dd
+              input.lrg(type="text", id="directorname", name="directorname", placeholder="Last Name, First")
+        fieldset.clear
           legend Cast
           button.btn.btn-info(type="button", id="addcast", name="addcast", data-toggle="modal", data-target="#addCastMember") Add new cast member
           br
@@ -136,6 +142,54 @@ block content
                     input.lrg(type="text", id="crewmemberschool", name="crewmemberschool")
               div.modal-footer  
                 button.btn.btn-default(name="newpersonsubmit2", id="newpersonsubmit2", type="button" data-dismiss="modal") Save
+      div.modal.fade(id="addDirector", role="dialog")
+        div.modal-dialog
+          div.modal-content
+            form(id="newdir", name="newdir")
+              div.modal-header
+                h3 Add New Director
+              div.modal-body
+                dl
+                  dt
+                    label(for="dirname") Director's Name
+                  dd
+                    input.lrg(type="text", id="dirname", name="dirname", placeholder="Last Name, First")
+                dl
+                  dt
+                    label(for="diryear") Graduation year
+                  dd
+                    input.lrg(type="text", id="diryear", name="diryear", placeholder="YYYY")
+                dl
+                  dt
+                    label(for="dirschool") Director's School
+                  dd
+                    input.lrg(type="text", id="dirschool", name="dirschool")
+              div.modal-footer  
+                button.btn.btn-default(name="newpersonsubmit3", id="newpersonsubmit3", type="button" data-dismiss="modal") Save
+      div.modal.fade(id="addProducer", role="dialog")
+        div.modal-dialog
+          div.modal-content
+            form(id="newprod", name="newprod")
+              div.modal-header
+                h3 Add New Producer
+              div.modal-body
+                dl
+                  dt
+                    label(for="prodname") Producer's Name
+                  dd
+                    input.lrg(type="text", id="prodname", name="prodname", placeholder="Last Name, First")
+                dl
+                  dt
+                    label(for="prodyear") Graduation year
+                  dd
+                    input.lrg(type="text", id="prodyear", name="prodyear", placeholder="YYYY")
+                dl
+                  dt
+                    label(for="prodschool") Producer's School
+                  dd
+                    input.lrg(type="text", id="prodschool", name="prodschool")
+              div.modal-footer  
+                button.btn.btn-default(name="newpersonsubmit4", id="newpersonsubmit4", type="button" data-dismiss="modal") Save
 block scripts
   script.
     $( "#castname" ).autocomplete({

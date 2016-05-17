@@ -72,8 +72,8 @@ module.exports = function(app) {
 	});
 
 	app.get('/api/namesearch', isAuthenticated, function(req, res) {
-		var queryTerm = {'_id':{'$regex':req.query.q,"$options":"i"}};
-		Contrib.distinct('_id',queryTerm, function(err, people) {
+		var queryTerm = {'name':{'$regex':req.query.q,"$options":"i"}};
+		Contrib.distinct('name',queryTerm, function(err, people) {
 			if (people) {
 				res.type('application/json');
 				res.jsonp(people);

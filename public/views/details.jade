@@ -22,34 +22,37 @@ block content
           | #{summary}
         p
           span.bold.gray Producer(s):
-          |  #{producers} 
+          for person in producers
+            | #{person.contribname}
         p
           span.bold.gray Director(s):
-          |  #{directors}
+          for person in directors
+            | #{person.contribname}
     div.row.awards-area
       Awards Section - GDA HoF ?
     div.row.cast-crew-area
       h2.padded Cast
-        | #{cast}
-        for person in cast
-          div.row.padded.cast-line
-            div.col-sm-2.headshot
-              img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
-            div.col-sm-4.castname
+      for person in cast
+        div.row.padded.cast-line
+          div.col-sm-2.headshot
+            img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
+          div.col-sm-4.castname
+            a(href="/person/#{person.contribname}")
               | #{person.contribname}
-            div.col-sm-1.spacer
-              | ...
-            div.col-sm-5.rolename
-              | {person.contribrole} 
+          div.col-sm-1.spacer
+            | ...
+          div.col-sm-5.rolename
+            | #{person.contribrole} 
     div.row
       h2.padded Crew
-        for person in crew
-          div.row.padded.cast-line
-            div.col-sm-2.headshot
-              img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
-            div.col-sm-4.castname
+      for person in crew
+        div.row.padded.cast-line
+          div.col-sm-2.headshot
+            img.portrait(src="../assets/images/blank_portrait.jpg", alt="HEAD")
+          div.col-sm-4.castname
+            a(href="/person/#{person.contribname}")
               | #{person.contribname}
-            div.col-sm-1.spacer
-              | ...
-            div.col-sm-5.rolename
-              | #{person.contribrole} 
+          div.col-sm-1.spacer
+            | ...
+          div.col-sm-5.rolename
+            | #{person.contribrole} 

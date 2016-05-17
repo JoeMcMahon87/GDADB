@@ -41,7 +41,6 @@ module.exports = function(app) {
 	});
 
 	app.get('/search', function(req, res) {
-console.log("SEARCH endpoint");
 		var queryType = req.query.type;
 		queryTerm = {'$text':{'$search':req.query.search}};
 		Play.find(queryTerm)
@@ -50,15 +49,32 @@ console.log("SEARCH endpoint");
 		});
 	});
 
+	app.get('/person/:id', function(req, res) {
+		var personId = req.params.id;
+		Contrib.findOne({ 'name' : req.params.id}, function(err, person) {
+			PlayRole.find({ 'contribname' : req.params.id}, function(err, perfs) {
+				res.render('person', { person : person, performances : perfs, auth : req.isAuthenticated() });
+			});
+                });
+	});
+
 	app.get('/details/:id', function(req, res) {
 		var playId = req.params.id;
 		Play.findOne({ '_id' : req.params.id}, function(err, play) {
-			PlayRole.find({ 'playID' : playId }, function(err, roles) {
+			PlayRole.find({ 'playID' : playId }, null, { sort : { 'contribname' : 1 }}, function(err, roles) {
+				var dirs = [];
+				var prods = [];
 				var cast = [];
 				var crew = [];
 				for (var index in roles) {
 					var person = roles[index];
-					if (person.contribrole.substring(0,5) == "CAST:") {
+					if (person.contribrole.substring(0,4) == "DIR:") {
+						person.contribrole = person.contribrole.substring(4);
+						dirs.push(person);
+					} else if (person.contribrole.substring(0,5) == "PROD:") {
+						person.contribrole = person.contribrole.substring(5);
+						prods.push(person);
+					} else if (person.contribrole.substring(0,5) == "CAST:") {
 						person.contribrole = person.contribrole.substring(5);
 						cast.push(person);
 					} else if (person.contribrole.substring(0,5) == "CREW:") {
@@ -66,8 +82,8 @@ console.log("SEARCH endpoint");
 						crew.push(person);
 					}
 				};
-console.log(JSON.stringify(crew));
-				res.render('details', { play : play, people: roles, cast : cast, crew : crew, auth : req.isAuthenticated() });
+console.log(JSON.stringify(prods));
+				res.render('details', { play : play, people: roles, directors : dirs, producers : prods, cast : cast, crew : crew, auth : req.isAuthenticated() });
 			});
 		});
 	});
