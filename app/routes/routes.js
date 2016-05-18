@@ -53,6 +53,7 @@ module.exports = function(app) {
 		var personId = req.params.id;
 		Contrib.findOne({ 'name' : req.params.id}, function(err, person) {
 			PlayRole.find({ 'contribname' : req.params.id}, function(err, perfs) {
+console.log(JSON.stringify(person));
 				res.render('person', { person : person, performances : perfs, auth : req.isAuthenticated() });
 			});
                 });

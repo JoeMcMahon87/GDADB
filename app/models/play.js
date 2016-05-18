@@ -6,6 +6,7 @@ Schema = mongoose.Schema;
 var PlaySchema = new Schema ({
     // "Hairspray (2016)"
     _id : String,
+    name : String,
     // "Spring" or "Fall"
     performanceseason : String, 
     // "2016"
@@ -20,10 +21,6 @@ var PlaySchema = new Schema ({
     performancedates : [Date],
     // "http://..."
     imageURL : String
-});
-
-PlaySchema.virtual('playID').get(function() {
-    return this._id;
 });
 
 module.exports = mongoose.model('Play', PlaySchema);
