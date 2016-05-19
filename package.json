@@ -9,15 +9,18 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "latest",
     "connect-flash": "^0.1.1",
+    "connect-form": "^0.2.1",
     "express": "latest",
     "express-session": "^1.13.0",
     "jade": "^1.11.0",
     "mongoose": "latest",
     "morgan": "latest",
+    "multiparty": "^4.1.2",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^4.0.0",
     "prototype": "0.0.5",
     "request": "latest",
+    "util": "^0.10.3"
   }
 }

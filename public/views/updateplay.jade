@@ -2,7 +2,7 @@ extend layout
 block content
   div.col-sm-12.gdadb-content
     div(ng-controller="myApp")
-      form(sf-schema="playschema" sf-form="form" sf-model="model")
+      form(sf-schema="playschema" sf-form="form" sf-model="model", enctype="multipart/form-data", method="POST", action="/update/#{play._id}")
         dl
           dt
             label(for="_id") Title
@@ -10,19 +10,24 @@ block content
             input.lrg(type="text", id="_id", class="required", name="_id", autocomplete="off", style="cursor:auto", value="#{play._id}")
         dl
           dt
-            label(for="keywords") keywords
+            label(for="keywords") Keywords
           dd
             input.lrg(type="text", id="keywords", name="keywords", value="#{play.keywords}")
         dl
           dt
-            label(for="season") season
+            label(for="genres") Genres
           dd
-            select.sml(size="1", name="season", id="season")
-              option(value="Fall") Fall
-              option(value="Spring") Spring
+            input.lrg(type="text", id="genres", name="genres", value="#{play.genres}")
         dl
           dt
-            label(for="year") year
+            label(for="season") Season
+          dd
+            select.sml(size="1", name="season", id="season")
+              option.sml(value="Fall") Fall
+              option.sml(value="Spring") Spring
+        dl
+          dt
+            label(for="year") Year
           dd
             input.sml(type="Text", id="year", class="digits", name="year")
         dl
@@ -32,7 +37,7 @@ block content
             input(type="file", id="playbillimage", name="playbillimage", accept=".gif,.png,.jpg")
         dl
           dt
-            label(for="description") description
+            label(for="description") Description
           dd
             textarea(id="description", name="description", rows="5", cols="80")
         dl.clear
