@@ -34,12 +34,12 @@ html
                           else
                             span.menulink(onclick='window.location="/signin"') Sign In
                   div.col-sm-2.gdadb-social-media.gdadb-header
-                    a(href="http://www.facebook.com/GonzagaDrama", title="Follow GDA on Facebook")
+                    a.soclink(href="http://www.facebook.com/GonzagaDrama", title="Follow GDA on Facebook")
                       span.follow-facebook
-                    a(href="https://twitter.com/GonzagaDrama", title="Follow GDA on Twitter")
+                    a.soclink(href="https://twitter.com/GonzagaDrama", title="Follow GDA on Twitter")
                       span.follow-twitter
              div.row-fluid.gdadb-content 
                block content
     footer
-      include scripts
+      include corescripts
       block scripts

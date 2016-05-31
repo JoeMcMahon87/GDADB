@@ -197,6 +197,7 @@ block content
                 button.btn.btn-default(name="newpersonsubmit4", id="newpersonsubmit4", type="button" data-dismiss="modal") Save
 block scripts
   script.
+    $(function() {
     $( "#castname" ).autocomplete({
       appendTo: "castname",
       source: function( request, response ) {
@@ -255,7 +256,75 @@ block scripts
       },
       minLength: 3,
       select: function( event, ui ) {
-            $('#crewname').val($('#crewmembername').val());
+            $('#dirname').val($('#crewmembername').val());
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#producername" ).autocomplete({
+      appendTo: "producername",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/namesearch",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+          }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+            $('#prodname').val($('#producername').val());
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#directorname" ).autocomplete({
+      appendTo: "directorname",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/namesearch",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+          }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+            $('#crewname').val($('#directorname').val());
       },
       open: function() {
         $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
@@ -300,6 +369,72 @@ block scripts
 
     $( "#crewmemberschool" ).autocomplete({
       appendTo: "crewmemberschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#dirschool" ).autocomplete({
+      appendTo: "dirschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#prodschool" ).autocomplete({
+      appendTo: "prodschool",
       source: function( request, response ) {
         $.ajax({
           url: "/api/school",
@@ -398,3 +533,44 @@ block scripts
         } 
       });
     });
+
+    $("#newpersonsubmit3").on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#dirname").val(),
+          year: $("#diryear").val(),
+          school: $("#dirschool").val(),
+          bio: ''
+        },
+        success: function(data) {
+          $('#directorname').val($('#dirname').val());
+          $('#directoryear').val($('#diryear').val());
+        } 
+      });
+    });
+
+    $("#newpersonsubmit4").on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#prodname").val(),
+          year: $("#prodyear").val(),
+          school: $("#prodschool").val(),
+          bio: ''
+        },
+        success: function(data) {
+          $('#producername').val($('#prodname').val());
+          $('#produceryear').val($('#prodyear').val());
+        } 
+      });
+    });
+
+    $('#performancedate').datepicker();
+
+    });
+
