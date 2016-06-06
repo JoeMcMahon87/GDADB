@@ -22,7 +22,17 @@ module.exports = function(app) {
 	app.get('/play', function(req, res) {
 		queryTerm = {'$text':{'$search':req.query.q}};
 		Play.find(queryTerm)
-			.sort('_id').exec(function(err, plays) {
+			.sort('name').exec(function(err, plays) {
+				res.send(plays);
+			});
+	});
+
+	app.get('/genresearch', function(req, res) {
+		queryTerm = { 'genres' : req.query.q };
+		console.log(queryTerm);
+		Play.find(queryTerm)
+			.sort('name').exec(function(err, plays) {
+				console.log(plays);
 				res.send(plays);
 			});
 	});
@@ -30,14 +40,14 @@ module.exports = function(app) {
 	// Create a play
 	app.post('/play', function (req, res) {
 		Play.create({
-			_id : req.body.PlayID, // Bound using Angular
-			PerformanceSeason : req.body.PerformanceSeason,
-			PerformanceYear : req.body.PerformanceYear,
-			Genres : req.body.Genres,
-			Keywords : req.body.Keywords,
-			Locations : req.body.Locations,
-			PerformanceDates : req.body.PerformanceDates,
-			ImageURL : req.body.ImageURL
+			name : req.body.PlayID,
+			performanceseason : req.body.PerformanceSeason,
+			performanceyear : req.body.PerformanceYear,
+			genres : req.body.Genres.split(','),
+			keywords : req.body.Keywords.split(','),
+			locations : req.body.Locations.split(','),
+			performancedates : req.body.PerformanceDates,
+			imageURL : req.body.ImageURL
 		}, function(err, play) {
 			if(err) {
 				res.send(err);
@@ -51,7 +61,7 @@ module.exports = function(app) {
 
 
 	app.get('/showPlay/:play_id', function (req, res) {
-		Play.findOne({ '_id' : req.params.play_id}, function(err, play) {
+		Play.findOne({ 'name' : req.params.play_id}, function(err, play) {
 			res.send(play)
 		});
 	});
@@ -59,7 +69,7 @@ module.exports = function(app) {
 	// Example DELETE route
 	app.delete('/play/:play_id', function (req, res) {
 		Play.remove({
-			_id: req.params.play_id
+			name : req.params.play_id
 		}, function(err, play) {
 			if(err) {
 				res.send(err);

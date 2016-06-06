@@ -7,7 +7,9 @@ block content
           h1
             | #{play._id}
         div.subtitle
-          | #{play.genres} |
+          for genre in play.genres
+            a(href="/genre?q=#{genre}") #{genre}
+          | |
           | #{play.season} #{play.year}
       div.col-sm-1.editctrl
         if auth

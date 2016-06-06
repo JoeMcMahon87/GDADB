@@ -46,7 +46,7 @@ module.exports = function(app) {
 		var queryType = req.query.type;
 		queryTerm = {'$text':{'$search':req.query.search}};
 		Play.find(queryTerm)
-			.sort('_id').exec(function(err, plays) {
+			.sort('name').exec(function(err, plays) {
 				res.render('index', { plays : plays, auth : req.isAuthenticated() });
 		});
 	});
@@ -62,7 +62,7 @@ module.exports = function(app) {
 
 	app.get('/details/:id', function(req, res) {
 		var playId = req.params.id;
-		Play.findOne({ '_id' : req.params.id}, function(err, play) {
+		Play.findOne({ 'name' : req.params.id}, function(err, play) {
 			console.log(JSON.stringify(play));
 			PlayRole.find({ 'playID' : playId }, null, { sort : { 'contribname' : 1 }}, function(err, roles) {
 				var dirs = [];
@@ -97,9 +97,17 @@ module.exports = function(app) {
 		res.sendFile('public/views/addplay.html', { root: '/home/jmcmahon/gdadb/'});
 	});
 
+	app.get('/genre', function(req, res) {
+		queryTerm = { 'genres' : req.query.q };
+		Play.find(queryTerm)
+			.sort('name').exec(function(err, plays) {
+				res.render('index', { plays : plays, auth : req.isAuthenticated() });
+			});
+	});
+
         app.get('/update/:id', isAuthenticated, function(req, res) {
 		var playId = req.params.id;
-		Play.findOne({ '_id' : req.params.id}, function(err, play) {
+		Play.findOne({ 'name' : req.params.id}, function(err, play) {
 			PlayRole.find({ 'playID' : playId }, function(err, roles) {
 				var cast = [];
 				var crew = [];
@@ -126,12 +134,12 @@ module.exports = function(app) {
         			res.end("invalid request: " + err.message);
         			return;
       			}
-			Play.findOne({ '_id' : fields._id}, function(err2, play) {
+			Play.findOne({ 'name' : fields._id}, function(err2, play) {
 console.log(JSON.stringify(play));
 				play.keywords = fields.keywords;
 				play.genres = fields.genres;
 				play.season = fields.season;
-				play.PerformanceYear = fields.year;
+				play.performanceyear = fields.year;
 				play.description = fields.description;
 				
 				play.save(function(err) {

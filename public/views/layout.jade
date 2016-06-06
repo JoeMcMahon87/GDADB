@@ -22,17 +22,35 @@ html
                         div.col-sm-2.gdadb-control-wrapper
                           button.form-control.btn.btn-primary.btn-sm(style="margin-bottom:10px; ", type='submit', ng-click='submitted=true') Search
                       div.row.gdadb-menu-row
-                        div.col-sm-3
-                          span.menulink(onclick='window.location="/add"') Plays
-                        div.col-sm-3
-                          span.menulink(onclick='window.location="/castcrew"') Cast and Crew
-                        div.col-sm-3
-                          span.menulink(onclick='window.location="/news"') News
-                        div.col-sm-3
-                          if auth
-                            span.menulink(onclick="window.location='/signout'") Sign Out
-                          else
-                            span.menulink(onclick='window.location="/signin"') Sign In
+                        div.col-sm-12.nav-collapse
+                          ul.nav.navbar-nav.col-sm-12
+                            li.dropdown.col-sm-3
+                              a.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", role="button", href="#") Plays
+                                span.caret
+                              ul.dropdown-menu
+                                li
+                                  a(href="/addplay") Add Play
+                            li.dropdown.col-sm-3
+                              a.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", role="button", href="#") Cast and Crew
+                                span.caret
+                              ul.dropdown-menu
+                                li
+                                  a(href="/addcast") Add Cast
+                                li
+                                  a(href="/addcrew") Add Crew
+                                li
+                                  a(href="/addstaff") Add Staff
+                            li.dropdown.col-sm-3
+                              a.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", role="button", href="#") News
+                                span.caret
+                              ul.dropdown-menu
+                                li
+                                  a(href="/news") Read News
+                            li.col-sm-3
+                            if auth
+                              a.menulink(onclick="window.location='/signout'") Sign Out
+                            else
+                              a.menulink(onclick='window.location="/signin"') Sign In
                   div.col-sm-2.gdadb-social-media.gdadb-header
                     a.soclink(href="http://www.facebook.com/GonzagaDrama", title="Follow GDA on Facebook")
                       span.follow-facebook
