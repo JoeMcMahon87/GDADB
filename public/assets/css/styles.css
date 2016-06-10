@@ -330,3 +330,6 @@ a {
     background-color: #bbb;
     border-color: #999;
 } 
+.subtitle>a {
+    color: #eee;
+}

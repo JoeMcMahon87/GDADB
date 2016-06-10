@@ -5,35 +5,37 @@ block content
       div.col-sm-11
         div.title
           h1
-            | #{play._id}
+            | #{play.name} (#{play.performanceseason} #{play.performanceyear})
         div.subtitle
+          | | 
           for genre in play.genres
             a(href="/genre?q=#{genre}") #{genre}
-          | |
+            | | 
           | #{play.season} #{play.year}
       div.col-sm-1.editctrl
         if auth
           span.menulink(onclick="window.location='/update/#{play._id}'") Edit
     div.row
       div.col-sm-4.centered
-        img.play-poster(src="../assets/images/#{play.poster_url}", alt="#{play._id}")
+        img.play-poster(src="#{play.imageURL}", alt="#{play.name}")
       div.col-sm-8.centered
         img.main-photo(src="../assets/images/woo-hof.jpg", alt="Main photo")
     div.row.summary-area
       div.padded
+        h3 Storyline
         p.summary
-          | #{play.summary}
+          | #{play.description}
         p.summary
           span.bold.gray Keyword(s):
-          | #{play.keywords}
+          |  #{play.keywords}
         p
           span.bold.gray Producer(s):
           for person in producers
-            | #{person.contribname}
+            |  #{person.contribname}
         p
           span.bold.gray Director(s):
           for person in directors
-            | #{person.contribname}
+            |  #{person.contribname}
     div.row.awards-area
       Awards Section - GDA HoF ?
     div.row.cast-crew-area

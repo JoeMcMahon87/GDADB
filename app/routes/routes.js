@@ -3,6 +3,9 @@
 // the bottom may override the ones at the top.
 var mongoose = require('mongoose'),
     multiparty = require('multiparty'),
+    fs = require('fs'),
+    path = require('path'),
+    uuid = require('node-uuid'),
     util = require('util'),
     express = require('express'),
     passport = require('passport'),
@@ -135,7 +138,43 @@ module.exports = function(app) {
         			return;
       			}
 			Play.findOne({ 'name' : fields._id}, function(err2, play) {
+				var imgURL = '';
+				if (files.playbillimage) {
+					fs.readFile(files.playbillimage[0].path, function(err, data) {
+						imgURL = '/images/' + uuid.v1() + path.extname(files.playbillimage[0].filename);
+						var newPath = __dirname + '/../../public' + imgURL;
+						fs.writeFile(newPath, data, function(err) {
+							play.imageURL = imgURL;
+				play.keywords = fields.keywords;
+				play.genres = fields.genres;
+				play.season = fields.season;
+				play.performanceyear = fields.year;
+				play.description = fields.description;
+				
 console.log(JSON.stringify(play));
+				play.save(function(err) {
+					if (err) {
+						console.log(err);
+					}
+				});
+				PlayRole.find({ 'playID' : play._id }, function(err, roles) {
+					var cast = [];
+					var crew = [];
+					for (var index in roles) {
+						var person = roles[index];
+						if (person.contribrole.substring(0,5) == "CAST:") {
+							person.contribrole = person.contribrole.substring(5);
+							cast.push(person);
+						} else if (person.contribrole.substring(0,5) == "CREW:") {
+							person.contribrole = person.contribrole.substring(5);
+							crew.push(person);
+						}
+					};
+					res.render('updateplay', { play : play, people : roles, cast : cast, crew : crew, auth : req.isAuthenticated() });
+				});
+			});
+						});
+					} else {
 				play.keywords = fields.keywords;
 				play.genres = fields.genres;
 				play.season = fields.season;
@@ -162,8 +201,9 @@ console.log(JSON.stringify(play));
 					};
 					res.render('updateplay', { play : play, people : roles, cast : cast, crew : crew, auth : req.isAuthenticated() });
 				});
-			});
-		});
+			}
+						});
+					});
 		return;
 	});
 

@@ -20,7 +20,9 @@ var PlaySchema = new Schema ({
     // 1/1/1970, 1/2/1970, etc.
     performancedates : [Date],
     // "http://..."
-    imageURL : String
+    imageURL : String,
+
+    description : String
 });
 
 module.exports = mongoose.model('Play', PlaySchema);

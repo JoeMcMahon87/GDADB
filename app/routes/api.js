@@ -54,6 +54,7 @@ module.exports = function(app) {
 			play.genres = fields.genres[0].split(",");
 			play.performanceseason = fields.season[0];
 			play.performanceyear = fields.year[0];
+			play.description = fields.description[0];
 			play.save(function(err) {
 				if (err) {
 					console.log(err);

@@ -3,102 +3,108 @@ block content
   div.col-sm-12.gdadb-content
     div(ng-controller="myApp")
       form(sf-schema="playschema" sf-form="form" sf-model="model", enctype="multipart/form-data", method="POST", action="/update/#{play._id}")
-        dl
-          dt
-            label(for="_id") Title
-          dd
-            input.lrg(type="text", id="_id", class="required", name="_id", autocomplete="off", style="cursor:auto", value="#{play._id}")
-        dl
-          dt
-            label(for="keywords") Keywords
-          dd
-            input.lrg(type="text", id="keywords", name="keywords", value="#{play.keywords}")
-        dl
-          dt
-            label(for="genres") Genres
-          dd
-            input.lrg(type="text", id="genres", name="genres", value="#{play.genres}")
-        dl
-          dt
-            label(for="season") Season
-          dd
-            select.sml(size="1", name="season", id="season")
-              option.sml(value="Fall") Fall
-              option.sml(value="Spring") Spring
-        dl
-          dt
-            label(for="year") Year
-          dd
-            input.sml(type="Text", id="year", class="digits", name="year")
-        dl
-          dt
-            label(for="playbillimage") Playbill Image
-          dd
-            input(type="file", id="playbillimage", name="playbillimage", accept=".gif,.png,.jpg")
-        dl
-          dt
-            label(for="description") Description
-          dd
-            textarea(id="description", name="description", rows="5", cols="80")
-        dl.clear
-          button.btn.btn-info(type="button", id="addproducer", name="addproducer", data-toggle="modal", data-target="#addProducer") Add new producer
-          br
-          dl.left
-            dt
-              label(for="producername") Producer
-            dd
-              input.lrg(type="text", id="producername", name="producername", placeholder="Last Name, First")
-        dl.clear
-          button.btn.btn-info(type="button", id="adddirector", name="adddirector", data-toggle="modal", data-target="#addDirector") Add new director
-          br
-          dl.left
-            dt
-              label(for="directorname") Director
-            dd
-              input.lrg(type="text", id="directorname", name="directorname", placeholder="Last Name, First")
-        fieldset.clear
-          legend Cast
-          button.btn.btn-info(type="button", id="addcast", name="addcast", data-toggle="modal", data-target="#addCastMember") Add new cast member
-          br
-          dl.left
-            dt
-              label(for="castname") Cast Member Name
-            dd
-              input.lrg(type="text", id="castname", name="castname", placeholder="Last Name, First")
-          dl.left
-            dt
-              label(for="castrole") Cast Member Role
-            dd
-              input.lrg(type="text", id="castrole", name="castrole")
-              button.pad10left(id="newrole", name="newrole") Save
-        fieldset
-          legend Crew
-          button.btn.btn-info(type="button", id="addcrew", name="addcrew", data-toggle="modal", data-target="#addCrewMember") Add new crew member
-          br
-          dl.left
-            dt
-              label(for="crewname") Crew Member Name
-            dd
-              input.lrg(type="text", id="crewname", name="crewname", placeholder="Last Name, First")
-          dl.left
-            dt
-              label(for="crewrole") Crew Member Role
-            dd
-              input.lrg(type="text", id="crewrole", name="crewrole")
-              button.pad10left(id="newrole2", name="newrole2") Save
-        fieldset
-          legend Performances
+        div.col-sm-6
           dl
-            label(for="performancedate") Performance Date
-          dd
-            input(type="text", id="performancedate", name="performancedate")
-            button.btn Add new date
-        br
-        br
-        div(id=submit_button)
-          button.btn.btn-lg(type="submit") Save
-          input(type="hidden", id="castyear", name="castyear", value="")
-          input(type="hidden", id="crewyear", name="crewyear", value="")
+            dt
+              label(for="_id") Title
+            dd
+              input.lrg(type="text", id="_id", class="required", name="_id", autocomplete="off", style="cursor:auto", value="#{play._id}")
+          dl
+            dt
+              label(for="keywords") Keywords
+            dd
+              input.lrg(type="text", id="keywords", name="keywords", value="#{play.keywords}")
+          dl
+            dt
+              label(for="genres") Genres
+            dd
+              input.lrg(type="text", id="genres", name="genres", value="#{play.genres}")
+          dl
+            dt
+              label(for="performanceseason") Season
+            dd
+              select.sml(size="1", name="performanceseason", id="performanceseason")
+                option.sml(value="Fall", selected=('#{play.performanceseason}' == 'Fall')) Fall
+                option.sml(value="Spring", selected=('#{play.performanceseason}' == 'Spring')) Spring
+          dl
+            dt
+              label(for="performanceyear") Year
+            dd
+              input.sml(type="Text", id="performanceyear", class="digits", name="performanceyear", value="#{play.performanceyear}")
+        div.col-sm-6
+          dl
+            dt
+              label(for="playbillimage") Playbill Image
+            dd
+              input(type="file", id="playbillimage", name="playbillimage", accept=".gif,.png,.jpg", value="#{play.imageURL}")
+          dl
+            dt
+              label(for="description") Description
+            dd
+              textarea(id="description", name="description", rows="5", cols="60")
+                | #{play.description}
+        div.col-sm-12
+          dl.clear
+            button.btn.btn-info(type="button", id="addproducer", name="addproducer", data-toggle="modal", data-target="#addProducer") Add new producer
+            br
+            dl.left
+              dt
+                label(for="producername") Producer
+              dd
+                input.lrg(type="text", id="producername", name="producername", placeholder="Last Name, First")
+          dl.clear
+            button.btn.btn-info(type="button", id="adddirector", name="adddirector", data-toggle="modal", data-target="#addDirector") Add new director
+            br
+            dl.left
+              dt
+                label(for="directorname") Director
+              dd
+                input.lrg(type="text", id="directorname", name="directorname", placeholder="Last Name, First")
+          fieldset.clear
+            legend Cast
+            button.btn.btn-info(type="button", id="addcast", name="addcast", data-toggle="modal", data-target="#addCastMember") Add new cast member
+            br
+            dl.left
+              dt
+                label(for="castname") Cast Member Name
+              dd
+                input.lrg(type="text", id="castname", name="castname", placeholder="Last Name, First")
+            dl.left
+              dt
+                label(for="castrole") Cast Member Role
+              dd
+                input.lrg(type="text", id="castrole", name="castrole")
+                button.pad10left(id="newrole", name="newrole") Save
+          fieldset
+            legend Crew
+            button.btn.btn-info(type="button", id="addcrew", name="addcrew", data-toggle="modal", data-target="#addCrewMember") Add new crew member
+            br
+            dl.left
+              dt
+                label(for="crewname") Crew Member Name
+              dd
+                input.lrg(type="text", id="crewname", name="crewname", placeholder="Last Name, First")
+            dl.left
+              dt
+                label(for="crewrole") Crew Member Role
+              dd
+                input.lrg(type="text", id="crewrole", name="crewrole")
+                button.pad10left(id="newrole2", name="newrole2") Save
+          fieldset
+            legend Performances
+            dl
+              label(for="performancedate") Performance Date
+            dd
+              input(type="text", id="performancedate", name="performancedate")
+              button.btn Add new date
+          br
+          br
+        div.row
+          div.title.centered.col-sm-12
+            div(id=submit_button)
+              button.btn.btn-lg(type="submit") Save
+              input(type="hidden", id="castyear", name="castyear", value="")
+              input(type="hidden", id="crewyear", name="crewyear", value="")
       div.modal.fade(id="addCastMember", role="dialog")
         div.modal-dialog
           div.modal-content
