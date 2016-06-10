@@ -27,19 +27,21 @@ html
                             li.dropdown.col-sm-3
                               a.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", role="button", href="#") Plays
                                 span.caret
-                              ul.dropdown-menu
-                                li
-                                  a(href="/addplay") Add Play
+                              if auth
+                                ul.dropdown-menu
+                                  li
+                                    a(href="/addplay") Add Play
                             li.dropdown.col-sm-3
                               a.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", role="button", href="#") Cast and Crew
                                 span.caret
-                              ul.dropdown-menu
-                                li
-                                  a(href="/addcast") Add Cast
-                                li
-                                  a(href="/addcrew") Add Crew
-                                li
-                                  a(href="/addstaff") Add Staff
+                              if auth
+                                ul.dropdown-menu
+                                  li
+                                    a(href="/addcast") Add Cast
+                                  li
+                                    a(href="/addcrew") Add Crew
+                                  li
+                                    a(href="/addstaff") Add Staff
                             li.dropdown.col-sm-3
                               a.dropdown-toggle(data-toggle="dropdown", aria-haspopup="true", role="button", href="#") News
                                 span.caret

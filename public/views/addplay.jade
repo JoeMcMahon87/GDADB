@@ -1,0 +1,437 @@
+extend layout
+block content
+  div.col-sm-12.gdadb-content
+    div(ng-controller="myApp")
+      form(sf-schema="playschema" sf-form="form" sf-model="model", enctype="multipart/form-data", method="POST", action="/api/saveplay")
+        div.col-sm-6
+          dl
+            dt
+              label(for="_id") Title
+            dd
+              input.lrg(type="text", id="_id", class="required", name="_id", autocomplete="off", style="cursor:auto")
+          dl
+            dt
+              label(for="keywords") Keywords
+            dd
+              input.lrg(type="text", id="keywords", name="keywords")
+          dl
+            dt
+              label(for="genres") Genres
+            dd
+              input.lrg(type="text", id="genres", name="genres")
+          dl
+            dt
+              label(for="season") Season
+            dd
+              select.sml(size="1", name="season", id="season")
+                option.sml(value="Fall") Fall
+                option.sml(value="Spring") Spring
+          dl
+            dt
+              label(for="year") Year
+            dd
+              input.sml(type="Text", id="year", class="digits", name="year")
+
+          fieldset
+            legend Performances
+            dl
+              label(for="performancedate") Performance Date
+            dd
+              input(type="text", id="performancedate", name="performancedate")
+              button.btn Add new date
+        div.col-sm-6
+          dl
+            dt
+              label(for="playbillimage") Playbill Image
+            dd
+              div#drop-zone
+              input(type="file", id="playbillimage", name="playbillimage", accept=".gif,.png,.jpg")
+          dl
+            dt
+              label(for="description") Description
+            dd
+              textarea(id="description", name="description", rows="5", cols="60")
+          br
+        div.row
+          div.title.centered.col-sm-12
+            div(id=submit_button)
+              button.btn.btn-lg(type="submit") Save
+block scripts
+  script.
+    $(function() {
+    $( "#castname" ).autocomplete({
+      appendTo: "castname",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/namesearch",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+          }
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+            $('#castname').val($('#castmembername').val());
+            $('#castyear').val($('#gradyear').val());
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#crewname" ).autocomplete({
+      appendTo: "crewname",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/namesearch",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+          }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+            $('#dirname').val($('#crewmembername').val());
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#producername" ).autocomplete({
+      appendTo: "producername",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/namesearch",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+          }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+            $('#prodname').val($('#producername').val());
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#directorname" ).autocomplete({
+      appendTo: "directorname",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/namesearch",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+          }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+            $('#crewname').val($('#directorname').val());
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#castmemberschool" ).autocomplete({
+      appendTo: "castmemberschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#crewmemberschool" ).autocomplete({
+      appendTo: "crewmemberschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#dirschool" ).autocomplete({
+      appendTo: "dirschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $( "#prodschool" ).autocomplete({
+      appendTo: "prodschool",
+      source: function( request, response ) {
+        $.ajax({
+          url: "/api/school",
+          dataType: "jsonp",
+          data: {
+            q: request.term
+          },
+
+          success: function( data ) {
+            response( $.map(data, function(item) {
+        	  return {
+        	    label: item
+        	  };
+            }));
+          },
+          complete: function() {
+         }
+
+        });
+      },
+      minLength: 3,
+      select: function( event, ui ) {
+      },
+      open: function() {
+        $( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+      },
+      close: function() {
+        $( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+      }
+    });
+
+    $("#newpersonsubmit").on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#castmembername").val(),
+          year: $("#gradyear").val(),
+          school: $("#castmemberschool").val(),
+          bio: ''
+        },
+        success: function(data) {
+          $('#castname').val($('#castmembername').val());
+          $('#castyear').val($('#gradyear').val());
+        } 
+      });
+    });
+
+    $("#newpersonsubmit2").on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#crewmembername").val(),
+          year: $("#crewgradyear").val(),
+          school: $("#crewmemberschool").val(),
+          bio: ''
+        },
+        success: function(data) {
+          $('#crewname').val($('#crewmembername').val());
+          $('#crewyear').val($('#crewgradyear').val());
+        } 
+      });
+    });
+
+    $("#newrole").on('click', function() {
+      $.ajax({
+        url: "/api/addrole",
+        type: "POST",
+        data: {
+          name: $("#castname").val(),
+          year: $("#castyear").val(),
+          role: 'CAST:' + $('#castrole').val(),
+          play: $('#_id').val()
+        },
+        success: function(data) {
+          alert("Added new role");
+        } 
+      });
+    });
+
+    $("#newrole2").on('click', function() {
+      $.ajax({
+        url: "/api/addrole",
+        type: "POST",
+        data: {
+          name: $("#crewname").val(),
+          year: $("#crewyear").val(),
+          role: 'CREW:' + $('#crewrole').val(),
+          play: $('#_id').val()
+        },
+        success: function(data) {
+          alert("Added new role");
+        } 
+      });
+    });
+
+    $("#newpersonsubmit3").on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#dirname").val(),
+          year: $("#diryear").val(),
+          school: $("#dirschool").val(),
+          bio: ''
+        },
+        success: function(data) {
+          $('#directorname').val($('#dirname').val());
+          $('#directoryear').val($('#diryear').val());
+        } 
+      });
+    });
+
+    $("#newpersonsubmit4").on('click', function(e) {
+      e.preventDefault();
+      $.ajax({
+        url: "/api/addperson",
+        type: "POST",
+        data: {
+          name: $("#prodname").val(),
+          year: $("#prodyear").val(),
+          school: $("#prodschool").val(),
+          bio: ''
+        },
+        success: function(data) {
+          $('#producername').val($('#prodname').val());
+          $('#produceryear').val($('#prodyear').val());
+        } 
+      });
+    });
+
+    $('#performancedate').datepicker();
+
+    });
+

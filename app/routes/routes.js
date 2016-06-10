@@ -93,8 +93,8 @@ module.exports = function(app) {
 		});
 	});
 
-	app.get('/add', function(req, res) {
-		res.sendFile('public/views/addplay.html', { root: '/home/jmcmahon/gdadb/'});
+	app.get('/addplay', function(req, res) {
+		res.render('addplay', { auth : req.isAuthenticated() });
 	});
 
 	app.get('/genre', function(req, res) {

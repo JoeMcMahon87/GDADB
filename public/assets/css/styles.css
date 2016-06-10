@@ -76,11 +76,6 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
 	width: 100%;
 	height: 36px;
 }
-.gdadb-buttons {
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-}
 .gdadb-menu-row {
 	height: 40px;
 	line-height: 40px;
@@ -318,3 +313,20 @@ a {
 .dropdown-menu>li>a {
     color: #eee;
 }
+.follow-facebook:hover {
+    opacity: 1;
+}
+.follow-twitter:hover {
+    opacity: 1;
+}
+#drop-zone {
+    height: 100px;
+    width: 200px;
+    background-color: #ddd;
+    border-radius: 5px;
+    border: 1px solid #aaa;
+}
+#drop-zone.drag-hover {
+    background-color: #bbb;
+    border-color: #999;
+} 

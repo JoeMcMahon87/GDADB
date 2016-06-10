@@ -4,6 +4,8 @@ var mongoose = require('mongoose'),
 	PlayRole = require('../models/playrole'),
 	Contrib = require('../models/contrib')
 
+var multiparty = require('multiparty');
+
 var isAuthenticated = function(req, res, next) {
 	if (req.isAuthenticated())
 		return next();
@@ -38,23 +40,27 @@ module.exports = function(app) {
 	});
 
 	// Create a play
-	app.post('/play', function (req, res) {
-		Play.create({
-			name : req.body.PlayID,
-			performanceseason : req.body.PerformanceSeason,
-			performanceyear : req.body.PerformanceYear,
-			genres : req.body.Genres.split(','),
-			keywords : req.body.Keywords.split(','),
-			locations : req.body.Locations.split(','),
-			performancedates : req.body.PerformanceDates,
-			imageURL : req.body.ImageURL
-		}, function(err, play) {
-			if(err) {
-				res.send(err);
+	app.post('/api/saveplay', isAuthenticated, function (req, res) {
+		var form = new multiparty.Form();
+		form.parse(req, function(err, fields, files) {
+			if (err) {
+				console.log("ERROR: " + err);
+				res.redirect("/");
 			}
-
-			Play.find(function(err, plays) {
-				res.send(plays);
+			var play = new Play();
+			play._id = fields._id[0];
+			play.name = fields._id[0];
+			play.keywords = fields.keywords[0].split(",");
+			play.genres = fields.genres[0].split(",");
+			play.performanceseason = fields.season[0];
+			play.performanceyear = fields.year[0];
+			play.save(function(err) {
+				if (err) {
+					console.log(err);
+					res.redirect("/");
+				} else {
+					res.redirect("/");
+				}
 			});
 		});
 	});
@@ -139,4 +145,16 @@ module.exports = function(app) {
 			}
 		});
 	});
+
+	app.post('/api/upload', isAuthenticated, function(req, res) {
+		var confirmation = {}
+		console.log("Upload start");
+		for(var key in req.files)
+		{
+			console.log(key + " " + req.files[key]);
+		}
+
+		res.json(confirmation)
+	});
+
 }
