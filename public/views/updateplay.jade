@@ -28,15 +28,16 @@ block content
                 option.sml(value="Spring", selected=('#{play.performanceseason}' == 'Spring')) Spring
           dl
             dt
-              label(for="performanceyear") Year
+              label(for="year") Year
             dd
-              input.sml(type="Text", id="performanceyear", class="digits", name="performanceyear", value="#{play.performanceyear}")
+              input.sml(type="Text", id="year", class="digits", name="year", value="#{play.performanceyear}")
         div.col-sm-6
           dl
             dt
               label(for="playbillimage") Playbill Image
             dd
-              input(type="file", id="playbillimage", name="playbillimage", accept=".gif,.png,.jpg", value="#{play.imageURL}")
+              img.smbill(src="#{play.imageURL}")
+              input(type="file", id="playbillimage", name="playbillimage", accept=".gif,.png,.jpg")
           dl
             dt
               label(for="description") Description
