@@ -104,7 +104,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
         color: #999;
 }
 .play-poster {
-	height: 500px;
+	height: 300px;
 	margin: auto;
 	display: block;
 }
@@ -335,5 +335,22 @@ a {
     height: 200px;
 }
 .myCarousel {
-    height: 500px;
+    min-height: 300px;
+}
+.item {
+    height: 300px;
+}
+
+.item img {
+    max-height: 100%;  
+    max-width: 100%; 
+    position: absolute;  
+    top: 0;  
+    bottom: 0;  
+    left: 0;  
+    right: 0;  
+    margin: auto;
+}
+.transparent {
+    background-color: transparent;
 }

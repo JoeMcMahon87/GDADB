@@ -14,7 +14,8 @@ block content
           | #{play.season} #{play.year}
       div.col-sm-1.editctrl
         if auth
-          span.menulink(onclick="window.location='/update/#{play._id}'") Edit
+          button.btn.btn-default(type="button", aria-label="Edit",onclick="window.location='/update/#{play._id}'")
+            span.glyphicon.glyphicon-pencil(aria-hidden="true")
     div.row
       div.col-sm-4.centered
         img.play-poster(src="#{play.imageURL}", alt="#{play.name}")
@@ -27,14 +28,16 @@ block content
               each pic, index in playpics
                 if index == 0
                   .item.active
-                    img(src='#{pic.url}', alt='#{pic.title}')
+                    span.helper
+                    img.img-responsive.center-block(src='#{pic.url}', alt='#{pic.title}')
                     .container
                       .carousel-caption
                         p
                           | #{pic.title} 
                 else
                   .item
-                    img(src='#{pic.url}', alt='#{pic.title}')
+                    span.helper
+                    img.img-responsive.center-block(src='#{pic.url}', alt='#{pic.title}')
                     .container
                       .carousel-caption
                         p
