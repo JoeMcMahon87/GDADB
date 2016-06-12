@@ -72,6 +72,7 @@ module.exports = function(app) {
 				var prods = [];
 				var cast = [];
 				var crew = [];
+				var playpics = [];
 				for (var index in roles) {
 					var person = roles[index];
 					if (person.contribrole.substring(0,4) == "DIR:") {
@@ -90,8 +91,11 @@ module.exports = function(app) {
 				};
 				play.year = play.PerformanceYear;
 				play.season = play.PerformanceSeason;
+				playpics.push({'url' : "/assets/images/woo.jpg", 'title' : "Test"});
+				playpics.push({'url' : "/assets/images/woo.jpg", 'title' : "Test 2"});
+console.log(playpics);
 				console.log(JSON.stringify(play));
-				res.render('details', { play : play, people: roles, directors : dirs, producers : prods, cast : cast, crew : crew, dirs : dirs, prods : prods, auth : req.isAuthenticated() });
+				res.render('details', { play : play, people: roles, directors : dirs, producers : prods, cast : cast, crew : crew, dirs : dirs, prods : prods, playpics : playpics, auth : req.isAuthenticated() });
 			});
 		});
 	});

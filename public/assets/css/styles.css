@@ -104,9 +104,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4c4c4c', end
         color: #999;
 }
 .play-poster {
-	min-height: 272px;
-	height: 100%;
-	width: 100%;
+	height: 500px;
 	margin: auto;
 	display: block;
 }
@@ -314,10 +312,10 @@ a {
     color: #eee;
 }
 .follow-facebook:hover {
-    opacity: 1;
+    background-position:0 -72px;
 }
 .follow-twitter:hover {
-    opacity: 1;
+    background-position:0 -72px;
 }
 #drop-zone {
     height: 100px;
@@ -335,4 +333,7 @@ a {
 }
 .smbill {
     height: 200px;
+}
+.myCarousel {
+    height: 500px;
 }

@@ -9,7 +9,7 @@ block content
         div.subtitle
           | | 
           for genre in play.genres
-            a(href="/genre?q=#{genre}") #{genre}
+            a(href="/genre?q=#{genre}") #{genre} 
             | | 
           | #{play.season} #{play.year}
       div.col-sm-1.editctrl
@@ -19,7 +19,31 @@ block content
       div.col-sm-4.centered
         img.play-poster(src="#{play.imageURL}", alt="#{play.name}")
       div.col-sm-8.centered
-        img.main-photo(src="../assets/images/woo-hof.jpg", alt="Main photo")
+        div
+          // Carousel
+          // ==================================================
+          div.myCarousel#myCarousel.carousel.slide(data-ride='carousel')
+            .carousel-inner
+              each pic, index in playpics
+                if index == 0
+                  .item.active
+                    img(src='#{pic.url}', alt='#{pic.title}')
+                    .container
+                      .carousel-caption
+                        p
+                          | #{pic.title} 
+                else
+                  .item
+                    img(src='#{pic.url}', alt='#{pic.title}')
+                    .container
+                      .carousel-caption
+                        p
+                          | #{pic.title} 
+            a.left.carousel-control(href='#myCarousel', role='button', data-slide='prev')
+              span.glyphicon.glyphicon-chevron-left
+            a.right.carousel-control(href='#myCarousel', role='button', data-slide='next')
+              span.glyphicon.glyphicon-chevron-right
+          // /.carousel
     div.row.summary-area
       div.padded
         h3 Storyline
