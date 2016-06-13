@@ -52,7 +52,8 @@ block content
               dt
                 label(for="producername") Producer
               dd
-                input.lrg(type="text", id="producername", name="producername", placeholder="Last Name, First")
+                input.lrg(type="text", id="producername", name="producername", placeholder="Last Name, First", value="#{prods}")
+                button.pad10left(id="newproducer", name="newproducer") Save
           dl.clear
             button.btn.btn-info(type="button", id="adddirector", name="adddirector", data-toggle="modal", data-target="#addDirector") Add new director
             br
@@ -60,7 +61,8 @@ block content
               dt
                 label(for="directorname") Director
               dd
-                input.lrg(type="text", id="directorname", name="directorname", placeholder="Last Name, First")
+                input.lrg(type="text", id="directorname", name="directorname", placeholder="Last Name, First", value="#{dirs}")
+                button.pad10left(id="newdirector", name="newdirector") Save
           fieldset.clear
             legend Cast
             button.btn.btn-info(type="button", id="addcast", name="addcast", data-toggle="modal", data-target="#addCastMember") Add new cast member
@@ -76,6 +78,12 @@ block content
               dd
                 input.lrg(type="text", id="castrole", name="castrole")
                 button.pad10left(id="newrole", name="newrole") Save
+          for person in cast
+            span.lrg #{person.contribname}
+            span.lrg #{person.contribrole}
+            button.btn.btn-default(type="button", aria-label="Remove")
+              span.glyphicon.glyphicon-remove.red
+          div.clear
           fieldset
             legend Crew
             button.btn.btn-info(type="button", id="addcrew", name="addcrew", data-toggle="modal", data-target="#addCrewMember") Add new crew member
@@ -91,6 +99,12 @@ block content
               dd
                 input.lrg(type="text", id="crewrole", name="crewrole")
                 button.pad10left(id="newrole2", name="newrole2") Save
+          for person in crew
+            div.left.lrg #{person.contribname}
+            div.left.lrg #{person.contribrole}
+            button.btn.btn-default(type="button", aria-label="Remove")
+              span.glyphicon.glyphicon-remove.red
+          div.clear
           fieldset
             legend Performances
             dl
@@ -533,6 +547,36 @@ block scripts
           name: $("#crewname").val(),
           year: $("#crewyear").val(),
           role: 'CREW:' + $('#crewrole').val(),
+          play: $('#_id').val()
+        },
+        success: function(data) {
+          alert("Added new role");
+        } 
+      });
+    });
+
+    $("#newdirector").on('click', function() {
+      $.ajax({
+        url: "/api/addrole",
+        type: "POST",
+        data: {
+          name: $("#directorname").val(),
+          role: 'DIR:Director',
+          play: $('#_id').val()
+        },
+        success: function(data) {
+          alert("Added new role");
+        } 
+      });
+    });
+
+    $("#newproducer").on('click', function() {
+      $.ajax({
+        url: "/api/addrole",
+        type: "POST",
+        data: {
+          name: $("#producername").val(),
+          role: 'PROD:Producer',
           play: $('#_id').val()
         },
         success: function(data) {

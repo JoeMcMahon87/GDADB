@@ -130,13 +130,13 @@ console.log(playpics);
 						crew.push(person);
 					} else if (person.contribrole.substring(0,4) == "DIR:") {
 						person.contribrole = person.contribrole.substring(5);
-						dirs.push(person);
+						dirs.push(person.contribname);
 					} else if (person.contribrole.substring(0,5) == "PROD:") {
 						person.contribrole = person.contribrole.substring(5);
-						prods.push(person);
+						prods.push(person.contribname);
 					}
 				};
-				res.render('updateplay', { play : play, people : roles, cast : cast, crew : crew, dirs : dirs, prods : prods, auth : req.isAuthenticated() });
+				res.render('updateplay', { play : play, people : roles, cast : cast, crew : crew, dirs : dirs.join(","), prods : prods.join(","), auth : req.isAuthenticated() });
 			});
 		});
 	});
