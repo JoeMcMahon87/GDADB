@@ -58,6 +58,10 @@ module.exports = function(app) {
 		var personId = req.params.id;
 		Contrib.findOne({ 'name' : req.params.id}, function(err, person) {
 			PlayRole.find({ 'contribname' : req.params.id}, function(err, perfs) {
+				console.log(JSON.stringify(perfs));
+				for (var i=0, len = perfs.length; i < len; i++) {
+					perfs[i].contribrole = perfs[i].contribrole.substring(perfs[i].contribrole.indexOf(":") + 1);
+				}
 				res.render('person', { person : person, performances : perfs, auth : req.isAuthenticated() });
 			});
                 });
@@ -65,8 +69,15 @@ module.exports = function(app) {
 
 	app.get('/details/:id', function(req, res) {
 		var playId = req.params.id;
-		Play.findOne({ 'name' : req.params.id}, function(err, play) {
-			console.log(JSON.stringify(play));
+		if (playId) {
+		Play.findOne({ '_id' : playId}, function(err, play) {
+			if (play) {
+			play.year = play.performanceyear;
+			play.season = play.performanceseason;
+			play.name = play._id;
+			if (!play.imageURL) {
+				play.imageURL = '';
+			}
 			PlayRole.find({ 'playID' : playId }, null, { sort : { 'contribname' : 1 }}, function(err, roles) {
 				var dirs = [];
 				var prods = [];
@@ -89,15 +100,14 @@ module.exports = function(app) {
 						crew.push(person);
 					}
 				};
-				play.year = play.PerformanceYear;
-				play.season = play.PerformanceSeason;
-				playpics.push({'url' : "/assets/images/woo.jpg", 'title' : "Test"});
-				playpics.push({'url' : "/assets/images/woo.jpg", 'title' : "Test 2"});
+				// playpics.push({'url' : "/assets/images/woo.jpg", 'title' : "Test"});
+				// playpics.push({'url' : "/assets/images/woo.jpg", 'title' : "Test 2"});
 console.log(playpics);
-				console.log(JSON.stringify(play));
 				res.render('details', { play : play, people: roles, directors : dirs, producers : prods, cast : cast, crew : crew, dirs : dirs, prods : prods, playpics : playpics, auth : req.isAuthenticated() });
 			});
+			}
 		});
+		}
 	});
 
 	app.get('/addplay', function(req, res) {
@@ -113,8 +123,11 @@ console.log(playpics);
 	});
 
         app.get('/update/:id', isAuthenticated, function(req, res) {
+		if (req.params.id) {
 		var playId = req.params.id;
-		Play.findOne({ 'name' : req.params.id}, function(err, play) {
+		Play.findOne({ '_id' : req.params.id}, function(err, play) {
+			if (play) {
+			play.name = play._id;
 			PlayRole.find({ 'playID' : playId }, function(err, roles) {
 				var dirs = [];
 				var prods = [];
@@ -138,13 +151,14 @@ console.log(playpics);
 				};
 				res.render('updateplay', { play : play, people : roles, cast : cast, crew : crew, dirs : dirs.join(","), prods : prods.join(","), auth : req.isAuthenticated() });
 			});
+			}
 		});
+		}
 	});
 
 	app.post('/update/:id', isAuthenticated, function(req, res) {
 		var form = new multiparty.Form();
 		form.parse(req, function(err, fields, files) {
-console.log(fields);
 			if (err) {
         			res.writeHead(400, {'content-type': 'text/plain'});
         			res.end("invalid request: " + err.message);
@@ -164,7 +178,6 @@ console.log(fields);
 							play.performanceyear = Number(fields.year);
 							play.description = fields.description;
 				
-console.log(JSON.stringify(play));
 							play.save(function(err) {
 								if (err) {
 									console.log(err);

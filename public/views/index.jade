@@ -8,5 +8,5 @@ block content
             div.input-group-addon
             div.form-control(type="text",style="height:auto")
               a(href='/details/#{p._id}')
-                img.play-image-sm(src='../assets/images/woo.jpg',alt='#{p._id}')
+                img.play-image-sm(src='#{p.imageURL}',alt='#{p._id}')
                 span.play-title= p._id

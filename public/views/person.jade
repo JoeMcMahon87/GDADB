@@ -18,7 +18,7 @@ block content
         h3 Performances
     for perf in performances
       div.row
-        span.playname.left
+        div.playname.left
           a(href="/details/#{perf.playID}") #{perf.playID}
-        span.rolename.left
+        div.rolename.left
           | #{perf.contribrole}

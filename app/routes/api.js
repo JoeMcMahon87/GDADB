@@ -31,7 +31,6 @@ module.exports = function(app) {
 
 	app.get('/genresearch', function(req, res) {
 		queryTerm = { 'genres' : req.query.q };
-		console.log(queryTerm);
 		Play.find(queryTerm)
 			.sort('name').exec(function(err, plays) {
 				console.log(plays);
