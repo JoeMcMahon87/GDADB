@@ -79,11 +79,11 @@ block content
                 input.lrg(type="text", id="castrole", name="castrole")
                 button.pad10left(id="newrole", name="newrole") Save
           for person in cast
-            span.lrg #{person.contribname}
-            span.lrg #{person.contribrole}
+            div.left.lrg #{person.contribname}
+            div.left.lrg #{person.contribrole}
             button.btn.btn-default(type="button", aria-label="Remove")
               span.glyphicon.glyphicon-remove.red
-          div.clear
+            div.clear
           fieldset
             legend Crew
             button.btn.btn-info(type="button", id="addcrew", name="addcrew", data-toggle="modal", data-target="#addCrewMember") Add new crew member
@@ -104,7 +104,7 @@ block content
             div.left.lrg #{person.contribrole}
             button.btn.btn-default(type="button", aria-label="Remove")
               span.glyphicon.glyphicon-remove.red
-          div.clear
+            div.clear
           fieldset
             legend Performances
             dl
